@@ -34,3 +34,4 @@ Because we're using Wasp as the full-stack framework, we can leverage a lot of i
 You also get access to Wasp's diverse, helpful community if you get stuck or need help.
 - 🤝 [Wasp Discord](https://discord.gg/aCamt5wCpS)
 
+Test for flow git flow.
