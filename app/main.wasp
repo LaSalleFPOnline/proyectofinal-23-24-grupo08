@@ -171,6 +171,50 @@ entity Logs {=psl
   level                    String
 psl=}
 
+// TODO: Research how to save img urls in the db
+entity Restaurant {=psl
+  id                        Int             @id @default(autoincrement())
+  owner                     User            @relation(fields: [ownerId], references: [id])
+  ownerId                   Int
+  name                      String
+  phone                     String
+  email                     String
+  location                  String
+  logo                      bytea
+  description               String
+  open_time                 DateTime        @default(now())
+  close_time                DateTime        @default(now())
+  daysClosed                String[]
+  capacity                  Int
+  url                       String
+  createdAt                 DateTime        @default(now())
+psl=}
+
+entity Booking {=psl
+  id                        Int             @id @default(autoincrement())
+  user                      User            @relation(fields: [userId], references: [id])
+  userId                    Int
+  restaurant                Restaurant      @relation(fields: [restaurantId], references: [id])
+  restaurantId              Int
+  date                      DateTime
+  time                      DateTime
+  qtyPeople                 Int
+  nameClient                String
+  status                    String          @default("pending")
+  notes                     String
+  createdAt                 DateTime        @default(now())
+psl=}
+
+entity Extra {=psl
+  id                        Int             @id @default(autoincrement())
+  name                      String
+  price                     Float
+  restaurant                Restaurant      @relation(fields: [restaurantId], references: [id])
+  restaurantId              Int
+  createdAt                 DateTime        @default(now())
+psl=}
+
+
 /* 📡 These are the Wasp Routes (You can protect them easily w/ 'authRequired: true');
  * https://wasp-lang.dev/docs/tutorial/pages
  */
