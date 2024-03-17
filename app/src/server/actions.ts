@@ -1,4 +1,4 @@
-import { type User, type Task, type File } from 'wasp/entities';
+import { type User, type Task, type File, Restaurant } from 'wasp/entities';
 import { HttpError } from 'wasp/server';
 import {
   type GenerateGptResponse,
@@ -9,6 +9,7 @@ import {
   type DeleteTask,
   type UpdateTask,
   type CreateFile,
+  type CreateRestaurant,
 } from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { GeneratedSchedule, StripePaymentResult } from '../shared/types';
@@ -334,3 +335,13 @@ export const updateCurrentUser: UpdateCurrentUser<Partial<User>, User> = async (
     data: user,
   });
 };
+
+export const createRestaurant: CreateRestaurant<Restaurant, Restaurant> = async (restaurant, context) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  return context.entities.Restaurant.create({
+    data: restaurant,
+  });
+}
