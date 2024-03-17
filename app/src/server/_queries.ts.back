@@ -1,4 +1,4 @@
-import { type DailyStats, type GptResponse, type User, type PageViewSource, type Task, type File } from 'wasp/entities';
+import { type DailyStats, type GptResponse, type User, type PageViewSource, type Task, type File, Restaurant} from 'wasp/entities';
 import { HttpError } from 'wasp/server';
 import {
   type GetGptResponses,
@@ -7,6 +7,7 @@ import {
   type GetAllTasksByUser,
   type GetAllFilesByUser,
   type GetDownloadFileSignedURL,
+  type GetRestaurant,
 } from 'wasp/server/operations';
 import { getDownloadFileSignedURLFromS3 } from './file-upload/s3Utils.js';
 
@@ -164,3 +165,13 @@ export const getPaginatedUsers: GetPaginatedUsers<GetPaginatedUsersInput, GetPag
     totalPages,
   };
 };
+
+export const getRestaurant: GetRestaurant<Restaurant> = async (args, context) => {
+  return context.entities.Restaurant.findMany({
+    where: {
+      id: {
+        equals: args.id,
+      }
+    }
+  })
+}

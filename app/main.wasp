@@ -93,44 +93,11 @@ entity User {=psl
   sendEmail                 Boolean         @default(false)
   datePaid                  DateTime?
   credits                   Int             @default(3)
-  gptResponses              GptResponse[]
   contactFormMessages       ContactFormMessage[]     
-  tasks                     Task[]
-  files                     File[]
+  restaurant                Restaurant?
+  bookings                  Booking[]
 psl=}
 
-entity GptResponse {=psl
-  id                        String          @id @default(uuid())
-  content                   String
-  user                      User            @relation(fields: [userId], references: [id])
-  userId                    Int
-  createdAt                 DateTime        @default(now())
-  updatedAt                 DateTime        @updatedAt
-psl=}
-
-entity Task {=psl
-  id                        String          @id @default(uuid())
-  description               String
-  time                      String          @default("1")
-  isDone                    Boolean         @default(false)
-  user                      User            @relation(fields: [userId], references: [id])
-  userId                    Int
-  createdAt                 DateTime        @default(now())
-psl=}
-
-entity File {=psl
-  id                        String          @id @default(uuid())
-  name                      String
-  type                      String
-  key                       String
-  uploadUrl                 String
-  user                      User            @relation(fields: [userId], references: [id])
-  userId                    Int
-  createdAt                 DateTime        @default(now())
-psl=}
-
-// TODO: add functionality to allow users to send messages to admin
-// and make them accessible via the admin dashboard
 entity ContactFormMessage {=psl
   id                        String          @id @default(uuid())
   content                   String
@@ -170,6 +137,52 @@ entity Logs {=psl
   message                  String
   level                    String
 psl=}
+
+// TODO: Research how to save img urls in the db
+entity Restaurant {=psl
+  id                        Int             @id @default(autoincrement())
+  owner                     User            @relation(fields: [ownerId], references: [id])
+  ownerId                   Int             @unique
+  name                      String
+  phone                     String
+  email                     String
+  location                  String
+  // logo                      bytea
+  description               String
+  open_time                 DateTime        @default(now())
+  close_time                DateTime        @default(now())
+  daysClosed                String[]
+  capacity                  Int
+  url                       String
+  createdAt                 DateTime        @default(now())
+  bookings                  Booking[]
+  extras                    Extra[]
+psl=}
+
+entity Booking {=psl
+  id                        Int             @id @default(autoincrement())
+  user                      User            @relation(fields: [userId], references: [id])
+  userId                    Int
+  restaurant                Restaurant      @relation(fields: [restaurantId], references: [id])
+  restaurantId              Int
+  date                      DateTime
+  time                      DateTime
+  qtyPeople                 Int
+  nameClient                String
+  status                    String          @default("pending")
+  notes                     String
+  createdAt                 DateTime        @default(now())
+psl=}
+
+entity Extra {=psl
+  id                        Int             @id @default(autoincrement())
+  name                      String
+  price                     Float
+  restaurant                Restaurant      @relation(fields: [restaurantId], references: [id])
+  restaurantId              Int
+  createdAt                 DateTime        @default(now())
+psl=}
+
 
 /* 📡 These are the Wasp Routes (You can protect them easily w/ 'authRequired: true');
  * https://wasp-lang.dev/docs/tutorial/pages
@@ -228,11 +241,11 @@ page CheckoutPage {
   component: import Checkout from "@src/client/app/CheckoutPage"
 }
 
-route FileUploadRoute { path: "/file-upload", to: FileUploadPage }
-page FileUploadPage {
-  authRequired: true,
-  component: import FileUpload from "@src/client/app/FileUploadPage"
-}
+// route FileUploadRoute { path: "/file-upload", to: FileUploadPage }
+// page FileUploadPage {
+//   authRequired: true,
+//   component: import FileUpload from "@src/client/app/FileUploadPage"
+// }
 
 route AdminRoute { path: "/admin", to: DashboardPage }
 page DashboardPage {
@@ -300,77 +313,41 @@ page AdminUIButtonsPage {
 
 // 📝 Actions
 
-action generateGptResponse {
-  fn: import { generateGptResponse } from "@src/server/actions.js",
-  entities: [User, Task, GptResponse]
-}
-
-action createTask {
-  fn: import { createTask } from "@src/server/actions.js",
-  entities: [Task]
-}
-
-action deleteTask {
-  fn: import { deleteTask } from "@src/server/actions.js",
-  entities: [Task]
-}
-
-action updateTask {
-  fn: import { updateTask } from "@src/server/actions.js",
-  entities: [Task]
-}
-
 action stripePayment {
   fn: import { stripePayment } from "@src/server/actions.js",
   entities: [User]
 }
 
 action updateCurrentUser {
-  fn: import { updateCurrentUser } from "@src/server/actions.js",
+  fn: import { updateCurrentUser } from "@src/server/actions",
   entities: [User]
 }
 
 action updateUserById {
-  fn: import { updateUserById } from "@src/server/actions.js",
+  fn: import { updateUserById } from "@src/server/actions",
   entities: [User]
 }
 
-action createFile {
-  fn: import { createFile } from "@src/server/actions.js",
-  entities: [User, File]
+action createRestaurant {
+  fn: import { createRestaurant } from "@src/server/actions",
+  entities: [User, Restaurant]
 }
-
 
 // 📚 Queries
 
-query getGptResponses {
-  fn: import { getGptResponses } from "@src/server/queries.js",
-  entities: [User, GptResponse]
-}
-
-query getAllTasksByUser {
-  fn: import { getAllTasksByUser } from "@src/server/queries.js",
-  entities: [Task]
-}
-
-query getAllFilesByUser {
-  fn: import { getAllFilesByUser } from "@src/server/queries.js",
-  entities: [User, File]
-}
-
-query getDownloadFileSignedURL {
-  fn: import { getDownloadFileSignedURL } from "@src/server/queries.js",
-  entities: [User, File]
-}
-
 query getDailyStats {
-  fn: import { getDailyStats } from "@src/server/queries.js",
+  fn: import { getDailyStats } from "@src/server/queries",
   entities: [User, DailyStats]
 }
 
 query getPaginatedUsers {
-  fn: import { getPaginatedUsers } from "@src/server/queries.js",
+  fn: import { getPaginatedUsers } from "@src/server/queries",
   entities: [User]
+}
+
+query getRestaurant {
+  fn: import { getRestaurant } from "@src/server/queries",
+  entities: [User, Restaurant]
 }
 
 /*
