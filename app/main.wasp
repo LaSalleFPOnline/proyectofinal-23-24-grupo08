@@ -97,6 +97,8 @@ entity User {=psl
   contactFormMessages       ContactFormMessage[]     
   tasks                     Task[]
   files                     File[]
+  restaurant                Restaurant?
+  bookings                  Booking[]
 psl=}
 
 entity GptResponse {=psl
@@ -175,12 +177,12 @@ psl=}
 entity Restaurant {=psl
   id                        Int             @id @default(autoincrement())
   owner                     User            @relation(fields: [ownerId], references: [id])
-  ownerId                   Int
+  ownerId                   Int             @unique
   name                      String
   phone                     String
   email                     String
   location                  String
-  logo                      bytea
+  // logo                      bytea
   description               String
   open_time                 DateTime        @default(now())
   close_time                DateTime        @default(now())
@@ -188,6 +190,8 @@ entity Restaurant {=psl
   capacity                  Int
   url                       String
   createdAt                 DateTime        @default(now())
+  bookings                  Booking[]
+  extras                    Extra[]
 psl=}
 
 entity Booking {=psl
