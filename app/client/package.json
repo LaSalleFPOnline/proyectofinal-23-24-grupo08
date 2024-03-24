@@ -22,7 +22,7 @@
         "react-helmet": "^6.1.0",
         "react-image": "^4.1.0",
         "react-redux": "^8.1.2",
-        "react-router-dom": "^6.8.1",
+        "react-router-dom": "^6.22.3",
         "react-svg": "^16.1.22",
         "the-new-css-reset": "^1.9.0"
     },
