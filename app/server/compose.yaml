@@ -28,7 +28,7 @@ services:
 
 configs:
   pgpass:
-    content: db:5432:*:${PGUSER}:${PGPASSWORD}
+    content: db:5432:*:postgres:postgres
   servers.json:
     content: |
       {"Servers": {"1": {
