@@ -1,14 +1,25 @@
-const app = require("./app");
-const http = require("http");
+const app = require("./express/app");
+const sequelize  = require("./sequelize");
 const { PORT } = require("./config/config");
-const { connectToDB } = require("./db");
-const { connectToORM } = require("../ormconfig");
 
-connectToDB();
-connectToORM();
+async function assertDatabaseConnectionOk() {
+  console.log(`Checking database connection...`);
+  try {
+    await sequelize.authenticate();
+    console.log("Database connection OK!");
+  } catch (error) {
+    console.log("Unable to connect to the database:");
+    console.log(error.message);
+    process.exit(1);
+  }
+}
 
-const server = http.createServer(app);
+const init = async () => {
+  await assertDatabaseConnectionOk();
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Express server running on port ${PORT}`);
+  });
+};
+
+init();
