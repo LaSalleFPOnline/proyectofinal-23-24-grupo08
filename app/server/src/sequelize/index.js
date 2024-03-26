@@ -37,4 +37,4 @@ for (const modelDefiner of modelDefiners) {
 // TODO: Apply extra setup (e.g. associations) if needed and fix
 applyExtraSetup(sequelize);
 
-module.exports = sequelize ;
+module.exports = sequelize;
