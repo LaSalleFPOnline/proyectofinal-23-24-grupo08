@@ -1,17 +1,18 @@
-import "./styles/globals.scss";
-import "the-new-css-reset/css/reset.css";
+import './styles/globals.scss';
+import 'the-new-css-reset/css/reset.css';
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { App } from "./App";
-import { LoginPage } from "./pages/loginPage/LoginPage";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import { App } from './App';
+// import { LoginPage } from './pages/loginPage/LoginPage';
+import UserProvider from './Context/UserProvider';
+import AppRouter from './routes/AppRouter';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/login" element={<LoginPage />} />
-    </Routes>
-  </BrowserRouter>
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <BrowserRouter>
+        <UserProvider>
+            <AppRouter />
+        </UserProvider>
+    </BrowserRouter>
 );
