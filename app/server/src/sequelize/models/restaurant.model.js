@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
-  sequelize.define("restaurant", {
+module.exports = (sequelize, Sequelize) => {
+  const Restaurant = sequelize.define("restaurant", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -59,4 +59,13 @@ module.exports = sequelize => {
       defaultValue: sequelize.NOW,
     },
   });
+
+  Restaurant.associate = (models) => {
+    Restaurant.hasOne(models.user);
+    Restaurant.hasMany(models.booking);
+
+    Restaurant.belongsTo(models.booking);
+  };
+
+  return Restaurant;
 };
