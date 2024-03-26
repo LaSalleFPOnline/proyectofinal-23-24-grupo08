@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = sequelize => {
-  sequelize.define("user", {
+module.exports = (sequelize) => {
+  const User = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -50,5 +50,6 @@ module.exports = sequelize => {
       defaultValue: "user",
     },
   });
-};
 
+  return User;
+};
