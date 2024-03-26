@@ -21,3 +21,4 @@ module.exports = {
     await queryInterface.bulkDelete("extras", null, {});
   },
 };
+
