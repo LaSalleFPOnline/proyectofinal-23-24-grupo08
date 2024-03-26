@@ -28,6 +28,14 @@ const UserProvider = (props) => {
         }
     };
 
+    const isRestaurant = () => {
+        return userData?.role === 2;
+    };
+
+    const isAdmin = () => {
+        return userData?.role === 1;
+    };
+
     const signUp = () => {};
 
     const signIn = (params) => {
@@ -77,7 +85,10 @@ const UserProvider = (props) => {
                 ...userData,
                 signUp,
                 signIn,
-                signOut
+                signOut,
+
+                isRestaurant,
+                isAdmin
             }}
         >
             {children}

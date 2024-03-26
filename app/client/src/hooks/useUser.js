@@ -2,8 +2,22 @@ import { useContext } from 'react';
 import { UserContext } from '../Context/UserProvider';
 
 export const useUser = () => {
-    const { accessToken, name, id, email, username, surname, role, isAuthenticated, state, signUp, signIn, signOut } =
-        useContext(UserContext);
+    const {
+        accessToken,
+        name,
+        id,
+        email,
+        username,
+        surname,
+        role,
+        isAuthenticated,
+        state,
+        signUp,
+        signIn,
+        signOut,
+        isRestaurant,
+        isAdmin
+    } = useContext(UserContext);
 
     return {
         accessToken,
@@ -17,6 +31,8 @@ export const useUser = () => {
         state,
         signUp,
         signIn,
-        signOut
+        signOut,
+        isRestaurant,
+        isAdmin
     };
 };
