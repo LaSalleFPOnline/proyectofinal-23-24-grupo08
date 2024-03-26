@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
-const { applyExtraSetup } = require("./extra-setup");
 const dotenv = require("dotenv");
+const db = require("./models");
 dotenv.config({ path: __dirname + "../../.env" });
 
 const sequelize = new Sequelize(
@@ -34,7 +34,15 @@ for (const modelDefiner of modelDefiners) {
   modelDefiner(sequelize);
 }
 
-// TODO: Apply extra setup (e.g. associations) if needed and fix
-applyExtraSetup(sequelize);
+async function main() {
+  try {
+    await db.sequelize.sync({ force: true });
+    console.log("Successfully run the function");
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+}
+
+main();
 
 module.exports = sequelize;
