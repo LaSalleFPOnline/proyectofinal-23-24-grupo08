@@ -20,9 +20,13 @@ const UserProvider = (props) => {
     const [userData, setUserData] = useState({ ...defaultUserData });
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log('*** USER PROVIDER LOAD');
-    }, []);
+    const init = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            setUserData({ ...user });
+        }
+    };
 
     const signUp = () => {};
 
@@ -49,7 +53,24 @@ const UserProvider = (props) => {
         });
     };
 
-    const signOut = () => {};
+    const signOut = () => {
+        setUserData({ ...defaultUserData });
+    };
+
+    useEffect(() => {
+        console.log('*** USER PROVIDER LOAD');
+        const { isAuthenticated } = userData;
+        if (isAuthenticated) {
+            localStorage.setItem('user', JSON.stringify(userData));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [userData]);
+
+    useEffect(() => {
+        init();
+    }, []);
+
     return (
         <UserContext.Provider
             value={{
