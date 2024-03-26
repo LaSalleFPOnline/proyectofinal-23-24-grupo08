@@ -2,9 +2,10 @@ const express = require("express");
 const cors = require("cors");
 
 const routes = {
-    auth: require("./routes/authRoutes"),
-    // add more routes here
-}
+  // auth: require("./routes/authRoutes"),
+  user: require("./routes/users"),
+  // add more routes here
+};
 
 const app = express();
 
@@ -22,17 +23,44 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 }
 
 app.get("/", (req, res) => {
-    res.send({ message: "Welcome to the API" });
+  res.send({ message: "Welcome to the API" });
 });
 
 for (const [routeName, routeController] of Object.entries(routes)) {
-	if (routeController.getAll) {
-		app.get(
-			`/api/${routeName}`,
-			makeHandlerAwareOfAsyncErrors(routeController.getAll)
-		);
-    }
-    // add more HTTP methods here
+  if (routeController.getAll) {
+    app.get(
+      `/api/${routeName}`,
+      makeHandlerAwareOfAsyncErrors(routeController.getAll)
+    );
+  }
+  // add more HTTP methods here
+  if (routeController.getById) {
+    app.get(
+      `/api/${routeName}/:id`,
+      makeHandlerAwareOfAsyncErrors(routeController.getById)
+    );
+  }
+
+  if (routeController.create) {
+    app.post(
+      `/api/${routeName}`,
+      makeHandlerAwareOfAsyncErrors(routeController.create)
+    );
+  }
+
+  if (routeController.update) {
+    app.put(
+      `/api/${routeName}/:id`,
+      makeHandlerAwareOfAsyncErrors(routeController.update)
+    );
+  }
+
+  if (routeController.remove) {
+    app.delete(
+      `/api/${routeName}/:id`,
+      makeHandlerAwareOfAsyncErrors(routeController.remove)
+    );
+  }
 }
 
 module.exports = app;
