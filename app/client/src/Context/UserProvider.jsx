@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const UserContext = createContext();
@@ -12,49 +12,58 @@ const defaultUserData = {
     surname: null,
     role: null,
     isAuthenticated: null,
+    isRestaurant: null,
+    isAdmin: null,
     state: null
+};
+
+const getInitUser = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user || defaultUserData;
 };
 
 const UserProvider = (props) => {
     const { children } = props;
-    const [userData, setUserData] = useState({ ...defaultUserData });
+    const [userData, setUserData] = useState({ ...getInitUser() });
     const navigate = useNavigate();
-
-    const init = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        if (user) {
-            setUserData({ ...user });
-        }
-    };
-
-    const isRestaurant = () => {
-        return userData?.role === 2;
-    };
-
-    const isAdmin = () => {
-        return userData?.role === 1;
-    };
 
     const signUp = () => {};
 
     const signIn = (params) => {
         const { email, password } = params;
 
-        // TODO login
+        // TODO login por AccessToken
 
-        const userDataMock = {
+        // MOCKS
+        let userDataMock = {
             accessToken: 'asd9239fjhjasid99ehskafbsjdfkas',
             name: 'nameAuthenticated',
             id: 12,
             email,
-            username: 'Username usuari',
+            username: 'can-balcells',
             surname: 'Balcells',
-            role: 1,
+            role: 2,
             isAuthenticated: true,
+            isRestaurant: true,
+            isAdmin: false,
             state: 1
         };
-        console.log('** sign in');
+
+        if (email === 'admin@dgusta.com') {
+            userDataMock = {
+                accessToken: 'asd9239fjhjasid99ehskafbsjdfkas',
+                name: 'nameAuthenticated',
+                id: 1,
+                email,
+                username: 'admin',
+                surname: 'Admin',
+                role: 1,
+                isAuthenticated: true,
+                isRestaurant: false,
+                isAdmin: true,
+                state: 1
+            };
+        }
         setUserData(userDataMock);
         navigate('/', {
             replace: true
@@ -63,21 +72,14 @@ const UserProvider = (props) => {
 
     const signOut = () => {
         setUserData({ ...defaultUserData });
+        localStorage.removeItem('user');
     };
 
     useEffect(() => {
-        console.log('*** USER PROVIDER LOAD');
+        console.log('*** USER PROVIDER user data --> ', userData);
         const { isAuthenticated } = userData;
-        if (isAuthenticated) {
-            localStorage.setItem('user', JSON.stringify(userData));
-        } else {
-            localStorage.removeItem('user');
-        }
+        if (isAuthenticated) localStorage.setItem('user', JSON.stringify(userData));
     }, [userData]);
-
-    useEffect(() => {
-        init();
-    }, []);
 
     return (
         <UserContext.Provider
@@ -85,10 +87,7 @@ const UserProvider = (props) => {
                 ...userData,
                 signUp,
                 signIn,
-                signOut,
-
-                isRestaurant,
-                isAdmin
+                signOut
             }}
         >
             {children}

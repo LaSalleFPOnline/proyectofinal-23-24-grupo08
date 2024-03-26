@@ -11,12 +11,12 @@ export const useUser = () => {
         surname,
         role,
         isAuthenticated,
+        isRestaurant,
+        isAdmin,
         state,
         signUp,
         signIn,
-        signOut,
-        isRestaurant,
-        isAdmin
+        signOut
     } = useContext(UserContext);
 
     return {
@@ -28,11 +28,11 @@ export const useUser = () => {
         surname,
         role,
         isAuthenticated,
+        isRestaurant,
+        isAdmin,
         state,
         signUp,
         signIn,
-        signOut,
-        isRestaurant,
-        isAdmin
+        signOut
     };
 };

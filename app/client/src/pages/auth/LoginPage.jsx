@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/useUser';
 
-export const LoginPage = () => {
+export default function LoginPage(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const { signIn } = useUser();
-    const navigate = useNavigate();
 
     const onButtonClick = (e) => {
         e.preventDefault();
@@ -74,4 +73,4 @@ export const LoginPage = () => {
             </div>
         </>
     );
-};
+}

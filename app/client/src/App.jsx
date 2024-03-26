@@ -1,12 +1,9 @@
 import React from 'react';
-import { LandingPage } from './pages/landingPage/LandingPage';
+// import { LandingPage } from './pages/landing/LandingPage';
 
 export const App = () => {
-    return (
-        <>
-            <LandingPage />
-        </>
-    );
+    console.log('app .....');
+    return <>{/* <LandingPage /> */}</>;
 };
 
 export default App;

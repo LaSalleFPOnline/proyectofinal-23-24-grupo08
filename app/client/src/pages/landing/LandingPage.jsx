@@ -1,15 +1,15 @@
 import React from 'react';
-import { Layout } from '../../components/layout/Layout';
+
 import { Button } from '../../components/button/Button';
 import { features } from './content';
 import { useUser } from '../../hooks/useUser';
 
-export const LandingPage = () => {
+const LandingPage = (props) => {
     const { name } = useUser();
     console.log('*** LANDIG PAGE useUser -> ', name);
 
     return (
-        <Layout>
+        <>
             {/* Title section */}
             <div className='mx-auto mt-48 max-w-7xl px-6 lg:px-8'>
                 <div className='mx-auto max-w-2xl text-center'>
@@ -55,6 +55,8 @@ export const LandingPage = () => {
                     <p className='mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl '></p>
                 </div>
             </div>
-        </Layout>
+        </>
     );
 };
+
+export default LandingPage;
