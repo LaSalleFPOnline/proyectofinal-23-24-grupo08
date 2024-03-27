@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
@@ -50,6 +50,14 @@ module.exports = (sequelize) => {
       defaultValue: "user",
     },
   });
+
+
+  User.associate = (models) => {
+    User.hasMany(models.booking);
+
+    User.belongsTo(models.restaurant);
+  };
+
 
   return User;
 };

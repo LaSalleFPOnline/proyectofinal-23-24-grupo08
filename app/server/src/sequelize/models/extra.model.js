@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
-  const Extra = sequelize.define("extras", {
+module.exports = (sequelize, Sequelize) => {
+  const Extra = sequelize.define("extra", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -27,6 +27,10 @@ module.exports = (sequelize) => {
       defaultValue: sequelize.NOW,
     },
   });
+
+  Extra.associate = (models) => {
+    Extra.belongsTo(models.booking);
+  };
 
   return Extra;
 };
