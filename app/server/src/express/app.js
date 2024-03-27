@@ -2,7 +2,14 @@ const express = require("express");
 const cors = require("cors");
 
 const routes = {
-  user: require("./routes/users"),
+  // basics operations
+  user: require("./routes/crud"),
+  restaurant: require("./routes/crud"),
+  booking: require("./routes/crud"),
+  extra: require("./routes/crud"),
+
+  // auth
+
   // add more routes here
 };
 
@@ -32,7 +39,7 @@ for (const [routeName, routeController] of Object.entries(routes)) {
       makeHandlerAwareOfAsyncErrors(routeController.getAll)
     );
   }
-  // add more HTTP methods here
+
   if (routeController.getById) {
     app.get(
       `/api/${routeName}/:id`,
