@@ -38,8 +38,12 @@ module.exports = (sequelize, Sequelize) => {
   });
 
   Booking.associate = (models) => {
-    Booking.belongsTo(models.user); // Booking pertenece a un User
-    Booking.belongsTo(models.restaurant); // Booking pertenece a un Restaurant
+    Booking.hasOne(models.restaurant);
+    Booking.hasOne(models.user);
+    Booking.hasMany(models.extra);
+
+    Booking.belongsTo(models.user);
+    Booking.belongsTo(models.restaurant);
   };
 
   return Booking;
