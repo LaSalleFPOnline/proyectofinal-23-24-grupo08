@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
-  const Restaurant = sequelize.define("restaurant", {
+module.exports = sequelize => {
+  sequelize.define("restaurant", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -59,6 +59,5 @@ module.exports = (sequelize) => {
       defaultValue: sequelize.NOW,
     },
   });
-
-  return Restaurant; // Devuelve el modelo directamente
 };
+
