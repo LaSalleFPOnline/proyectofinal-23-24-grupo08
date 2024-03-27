@@ -3,6 +3,10 @@ const cors = require("cors");
 
 const routes = {
   user: require("./routes/users"),
+  restaurant: require("./routes/restaurants"),
+  booking: require("./routes/bookings"),
+  extra: require("./routes/extras"),
+
   // add more routes here
 };
 
