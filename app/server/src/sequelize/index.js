@@ -36,7 +36,7 @@ for (const modelDefiner of modelDefiners) {
 
 async function main() {
   try {
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: false });
     console.log("Successfully run the function");
   } catch (err) {
     console.log("Error: ", err);
