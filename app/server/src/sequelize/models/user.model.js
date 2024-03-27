@@ -51,11 +51,13 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
+
   User.associate = (models) => {
     User.hasMany(models.booking);
 
     User.belongsTo(models.restaurant);
   };
+
 
   return User;
 };

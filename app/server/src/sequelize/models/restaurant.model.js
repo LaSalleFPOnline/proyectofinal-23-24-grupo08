@@ -61,11 +61,12 @@ module.exports = (sequelize, Sequelize) => {
   });
 
   Restaurant.associate = (models) => {
-    Restaurant.hasOne(models.user);
-    Restaurant.hasMany(models.booking);
+  Restaurant.hasOne(models.user);
+  Restaurant.hasMany(models.booking);
 
-    Restaurant.belongsTo(models.booking);
+  Restaurant.belongsTo(models.booking);
   };
 
   return Restaurant;
+
 };
