@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const authRoutes = require("./routes/auth.js"); //borrar
 
 const routes = {
   // basics operations
@@ -9,7 +10,7 @@ const routes = {
   extra: require("./routes/crud"),
 
   // auth
-
+  userAuth: require("./routes/auth"),
   // add more routes here
 };
 
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api", authRoutes); //yo
 
 function makeHandlerAwareOfAsyncErrors(handler) {
   return async function (req, res, next) {
