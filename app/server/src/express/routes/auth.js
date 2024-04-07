@@ -1,7 +1,6 @@
 const { models } = require("../../sequelize");
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // Ruta para la solicitud de inicio de sesión
@@ -16,8 +15,7 @@ router.post("/login", async (req, res) => {
         username,
       },
     });
-    console.log("--------> password:", password);
-    console.log("-------->user password:", user.password);
+
     if (user && password === user.password) {
       // Si el usuario y la contraseña son correctos, generar el token JWT
       jwt.sign({ user }, "secretKey", { expiresIn: "1h" }, (err, token) => {
@@ -28,16 +26,23 @@ router.post("/login", async (req, res) => {
           res.status(200).json({
             message: "Login correcto con token",
             token,
+            status: "OK",
           });
         }
       });
     } else {
-      res.status(401).json({ message: "Credenciales inválidas" });
+      res.status(401).json({
+        message: "Credenciales inválidas",
+        status: "Error",
+      });
     }
   } catch (error) {
     // Manejar cualquier error interno
     console.error("Error al iniciar sesión", error);
-    res.status(500).json({ message: "Error interno" });
+    res.status(500).json({
+      message: "Error interno",
+      status: "Error",
+    });
   }
 });
 
