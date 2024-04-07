@@ -3,13 +3,16 @@ import React from 'react';
 import { Button } from '../../components/button/Button';
 import { features } from './content';
 import { useUser } from '../../hooks/useUser';
+import ExampleApiUsageGet from '../../components/ExampleApiUsage/ExampleApiUsageGet';
 
 const LandingPage = (props) => {
     const { name } = useUser();
+
     console.log('*** LANDIG PAGE useUser -> ', name);
 
     return (
         <>
+            <ExampleApiUsageGet />
             {/* Title section */}
             <div className='mx-auto mt-48 max-w-7xl px-6 lg:px-8'>
                 <div className='mx-auto max-w-2xl text-center'>
