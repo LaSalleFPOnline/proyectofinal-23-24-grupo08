@@ -25,7 +25,8 @@ const _routePublicPaths = {
 };
 
 const _routeAuthPaths = {
-    login: '/login'
+    login: '/login',
+    register: '/registro',
 };
 
 const getRoutePathsByType = (type) => {
