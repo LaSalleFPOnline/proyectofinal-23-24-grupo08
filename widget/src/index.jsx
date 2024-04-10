@@ -4,10 +4,13 @@ import 'the-new-css-reset/css/reset.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { DGustaWidgetApp } from './DGustaWidgetApp';
+import BookingProvider from './Context/BookingProvider';
+import { App } from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('dgusta-widget-booking')).render(
     <BrowserRouter>
-        <DGustaWidgetApp />
+        <BookingProvider>
+            <App />
+        </BookingProvider>
     </BrowserRouter>
 );
