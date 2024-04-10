@@ -6,7 +6,11 @@ const ConfigurationPage = (props) => {
     const { name } = useUser();
     console.log('*** ConfigurationPage -> ', { name, idRestaurant });
 
-    return <h1>ConfigurationPage</h1>;
+    return (
+        <>
+            <RestaurantNavBar/>
+        </>
+    );
 };
 
 export default ConfigurationPage;

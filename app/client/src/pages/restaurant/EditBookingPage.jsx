@@ -6,7 +6,11 @@ const EditBookingPage = (props) => {
     const { name } = useUser();
     console.log('*** DASHBOAR RESTAURANT PAGE useUser -> ', { name, idRestaurant, idBooking });
 
-    return <h1>EditBookingPage</h1>;
+    return (
+        <>
+            <RestaurantNavBar/>
+        </>
+    );
 };
 
 export default EditBookingPage;

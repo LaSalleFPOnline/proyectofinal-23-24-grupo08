@@ -16,9 +16,7 @@ const getRestaurantRoutes = () => {
             path={path}
             element={
                 <RestaurantProtectionRoute>
-                    <RestaurantLayout>
-                        <Page page={page} />
-                    </RestaurantLayout>
+                    <Page page={page} />
                 </RestaurantProtectionRoute>
             }
             key={`routes-restaurant-${key}`}

@@ -6,7 +6,6 @@ const RestaurantLayout = ({ children }) => {
     return (
         <>
             <Navigation />
-            <p>Restaurant layout</p>
             <main>{children}</main>
             <Footer />
         </>
