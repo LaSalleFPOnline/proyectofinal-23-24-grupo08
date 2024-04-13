@@ -29,7 +29,10 @@ npm install
 ```
 npm run dev
 ```
+### Format code
 
+npm i -D --save-exact @biomejs/biome
+npx @biomejs/biome format --write ./src
 
 ### Usage
 
