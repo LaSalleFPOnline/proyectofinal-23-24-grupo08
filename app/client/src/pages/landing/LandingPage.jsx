@@ -9,7 +9,7 @@ import React from "react";
 const LandingPage = (props) => {
   const { name } = useUser();
 
-//   console.log("*** LANDIG PAGE useUser -> ", name);
+  console.log("*** LANDIG PAGE useUser -> ", name);
 
   return (
     <>
