@@ -1,0 +1,37 @@
+
+th, td {
+    min-width: 250px; 
+}
+
+
+.table-wrapper {
+    overflow-x: auto;
+    white-space: nowrap; 
+}
+
+table {
+    width: auto;
+    border-collapse: collapse;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+thead th,
+tbody td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+tbody tr{
+    height: 100px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

@@ -10,7 +10,12 @@ const EditBookingPage = (props) => {
 		idBooking,
 	});
 
-	return <h1>EditBookingPage</h1>;
+    return (
+        <>
+            <RestaurantNavBar/>
+        </>
+    );
+
 };
 
 export default EditBookingPage;

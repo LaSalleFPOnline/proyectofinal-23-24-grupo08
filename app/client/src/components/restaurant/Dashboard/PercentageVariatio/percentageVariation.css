@@ -1,0 +1,7 @@
+.percentageBox{
+    padding: 4px;
+    border-radius: 4px;
+    margin-top: auto;
+    align-self: flex-end;
+    min-width: 20px;
+}

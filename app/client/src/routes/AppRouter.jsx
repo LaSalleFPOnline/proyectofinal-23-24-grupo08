@@ -9,21 +9,19 @@ import RestaurantLayout from "../layouts/RestaurantLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
 const getRestaurantRoutes = () => {
-	const routePaths = getRoutePaths("restaurant");
-	return routePaths.map(({ path, page }, key) => (
-		<Route
-			exact
-			path={path}
-			element={
-				<RestaurantProtectionRoute>
-					<RestaurantLayout>
-						<Page page={page} />
-					</RestaurantLayout>
-				</RestaurantProtectionRoute>
-			}
-			key={`routes-restaurant-${key}`}
-		/>
-	));
+    const routePaths = getRoutePaths('restaurant');
+    return routePaths.map(({ path, page }, key) => (
+        <Route
+            exact
+            path={path}
+            element={
+                <RestaurantProtectionRoute>
+                    <Page page={page} />
+                </RestaurantProtectionRoute>
+            }
+            key={`routes-restaurant-${key}`}
+        />
+    ));
 };
 
 const getAdminRoutes = () => {
