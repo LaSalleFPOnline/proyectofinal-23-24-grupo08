@@ -1,11 +1,11 @@
-import React from 'react';
-import { useUser } from '../../hooks/useUser';
+import React from "react";
+import { useUser } from "../../hooks/useUser";
 
 const AdminBillingPage = (props) => {
-    const { name } = useUser();
-    console.log('*** AdminBillingPage -> ', { name });
+	const { name } = useUser();
+	console.log("*** AdminBillingPage -> ", { name });
 
-    return <h1>AdminBillingPage</h1>;
+	return <h1>AdminBillingPage</h1>;
 };
 
 export default AdminBillingPage;

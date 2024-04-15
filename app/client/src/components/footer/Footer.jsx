@@ -1,6 +1,5 @@
 import React from "react";
 import { footerContent, footerTitle } from "./content";
-import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -9,7 +8,7 @@ export const Footer = () => {
         <div className="w-full md:w-1/2 md:flex items-center">
           <span className="text-muted text-white">{footerTitle}</span>
         </div>
-        
+
         {footerContent.map((item) => (
           <a
             key={item.name}

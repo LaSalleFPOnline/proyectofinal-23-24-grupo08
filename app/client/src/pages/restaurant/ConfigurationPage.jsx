@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useUser } from '../../hooks/useUser';
 import RestaurantNavBar from '../../components/restaurant/RestaurantNavBar/restaurantNavBar';
@@ -7,9 +8,9 @@ import ConfigurationPersonalData from '../../components/restaurant/Configuration
 
 
 const ConfigurationPage = (props) => {
-    const { idRestaurant } = props;
-    const { name } = useUser();
-    console.log('*** ConfigurationPage -> ', { name, idRestaurant });
+	const { idRestaurant } = props;
+	const { name } = useUser();
+	console.log("*** ConfigurationPage -> ", { name, idRestaurant });
 
     const handleButtonClick = (key) => {
         console.log("Botón clicado:", key);

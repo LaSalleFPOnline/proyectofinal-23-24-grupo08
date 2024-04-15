@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useUser } from '../../hooks/useUser';
 import RestaurantNavBar from '../../components/restaurant/RestaurantNavBar/restaurantNavBar';
@@ -5,10 +6,14 @@ import './bookingStyles.css';
 import BookingCards from '../../components/restaurant/Bookings/BookingCards/BookingCards';
 import BookingCalendar from '../../components/restaurant/Bookings/BookingCalendar/BookingCalendar';
 
+
 const BookingsPage = (props) => {
-    const { idRestaurant } = props;
-    const { name } = useUser();
-    console.log('*** BOOKINGS RESTAURANT PAGE useUser -> ', { name, idRestaurant });
+	const { idRestaurant } = props;
+	const { name } = useUser();
+	console.log("*** BOOKINGS RESTAURANT PAGE useUser -> ", {
+		name,
+		idRestaurant,
+	});
 
     return (
         <>
