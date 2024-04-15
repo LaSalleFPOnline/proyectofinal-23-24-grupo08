@@ -1,23 +1,21 @@
-/* Agrega estos estilos en tu archivo bookingCalendarStyles.css */
 
-/* Establecer un ancho mínimo para las columnas */
 th, td {
-    min-width: 250px; /* Puedes ajustar este valor según tus necesidades */
+    min-width: 250px; 
 }
 
-/* Hacer que el contenido que exceda el ancho mínimo genere un scroll horizontal */
+
 .table-wrapper {
     overflow-x: auto;
-    white-space: nowrap; /* Esto evita que el contenido se ajuste automáticamente al contenedor */
+    white-space: nowrap; 
 }
 
 table {
-    width: auto; /* Ancho automático para que el contenido pueda desbordar */
-    border-collapse: collapse; /* Esto es para fusionar los bordes de las celdas */
+    width: auto;
+    border-collapse: collapse;
 }
 
 thead th {
-    background-color: #f2f2f2; /* Color de fondo de las cabeceras */
+    background-color: #f2f2f2;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -26,7 +24,7 @@ thead th {
 thead th,
 tbody td {
     padding: 8px;
-    border: 1px solid #ddd; /* Borde de las celdas */
+    border: 1px solid #ddd;
     text-align: left;
 }
 
@@ -35,5 +33,5 @@ tbody tr{
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo de las filas pares */
+    background-color: #f2f2f2;
 }
