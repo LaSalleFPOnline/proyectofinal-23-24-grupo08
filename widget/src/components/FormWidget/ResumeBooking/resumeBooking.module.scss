@@ -1,0 +1,43 @@
+.resumeBooking {
+    width: 100%;
+    background-color: var(--clr_50);
+    border-radius: 5px;
+    color: var(--clr_100);
+    padding: 10px 20px 5px;
+    margin-top: 20px;
+
+    h5 {
+        margin-bottom: 15px;
+    }
+
+    .line {
+        width: 100%;
+        margin: 7px 0;
+        display: flex;
+        justify-content: flex-start;
+        color: var(--clr_100);
+
+        .resumeIcon {
+            margin-right: 20px;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        svg {
+            margin-top: 2px;
+        }
+    }
+
+    h5 {
+        font-size: var(--body_s);
+        line-height: var(--body_m);
+        font-weight: 700;
+        color: var(--clr_100);
+    }
+
+    p {
+        color: var(--clr_100);
+    }
+}

@@ -1,0 +1,35 @@
+.contentTitle {
+    position: relative;
+    margin-bottom: 40px;
+
+    .innerContentTitle {
+        padding-bottom: 30px;
+    }
+}
+
+.contentText {
+    p {
+        margin-bottom: 20px;
+    }
+}
+
+.contentFieldForm {
+    margin: 10px 0;
+
+    &.labelFlex {
+        display: flex;
+        vertical-align: middle;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+}
+
+.labelBoxSmall {
+    width: 100px;
+    position: relative;
+    margin-right: 10px;
+    font-size: var(--body_s);
+    line-height: var(--body_m);
+    font-weight: 700;
+}

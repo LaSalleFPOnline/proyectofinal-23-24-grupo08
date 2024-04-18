@@ -1,0 +1,78 @@
+@use '../../styles/global-vars' as global;
+
+.fieldInput {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+
+    input,
+    textarea {
+        width: 100%;
+        border: 1px solid var(--clr_30);
+        border-radius: 5px;
+        padding: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: var(--body_s);
+        line-height: var(--body_m);
+        color: var(--clr_30);
+
+        &:focus {
+            border-color: var(--clr_0);
+        }
+    }
+
+    textarea {
+        height: 150px;
+    }
+
+    span.error {
+        padding-left: 10px;
+        color: var(--error);
+    }
+
+    &.little {
+        input,
+        textarea {
+            width: 100px;
+        }
+    }
+
+    .name {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: var(--body_xs);
+        position: absolute;
+        top: -9px;
+        left: 15px;
+        display: none;
+        padding: 0 10px;
+        background: var(--clr_100);
+        color: var(--clr_30);
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &.default {
+        input,
+        textarea {
+            border-color: var(--clr_30);
+            color: var(--clr_0);
+
+            &:focus {
+                border-color: var(--clr_0);
+            }
+        }
+
+        .name {
+            color: var(--clr_0);
+        }
+    }
+}
+
+input::placeholder,
+textarea::placeholder {
+    font-weight: 300;
+}

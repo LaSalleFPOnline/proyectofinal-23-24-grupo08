@@ -1,88 +1,56 @@
-import { createContext, useEffect, useLayoutEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useData } from '../hooks/useData';
+import { getFormatDate } from '../helpers/dateHelper';
 
 export const BookingContext = createContext();
 
 const defaultBookingData = {
     idRestaurant: null,
-    username: null,
+    name: null,
     phone: null,
     mail: null,
     date: null,
-    hour: null,
-    numPers: null
+    time: null,
+    numPers: null,
+    comments: null
 };
 
 const BookingProvider = (props) => {
     const { children } = props;
-    const [isValidRestaurant, setIsValidRestaurant] = useState(false);
     const [bookingData, setBookingData] = useState({ ...defaultBookingData });
-    const [configRestaurant, setConfigRestaurant] = useState({});
-    const {
-        data: dataValidateRestaurant,
-        loading: loadingValidateRestaurant,
-        error: errorValidateRestaurant,
-        getData: getDataValidateRestaurant
-    } = useData();
-    const {
-        data: dataConfigRestaurant,
-        loading: loadingConfigRestaurant,
-        error: errorConfigRestaurant,
-        getData: getDataConfigRestaurant
-    } = useData();
+    const [dataHours, setDataHours] = useState(null);
 
-    useLayoutEffect(() => {
-        const root = document.querySelector('#dgusta-widget-booking');
-        const idRestaurant = root.dataset.restaurant;
-        console.log('restaurant ---> ', idRestaurant);
-
-        // TODO: Canviar per la crida correcta
-        getDataValidateRestaurant('/v2/pokemon/ditto');
-
-        // TODO: Activar similar
-        // getDataValidateRestaurant(`/validateRestaurant/${idRestaurant}`);
-    }, []);
+    // TODO: Canviar al conectar amb l'API
+    const { data: dataHours2, loading: loadingHours, error: errorHours, getData: getHours } = useData();
 
     useEffect(() => {
-        if (dataValidateRestaurant && dataValidateRestaurant.name === 'ditto') {
-            console.log('*** VALIDATE RESTAURANT');
-            // MOCK ID RESTAURANT
-            const idRestaurant = 123;
-            setBookingData({ ...bookingData, idRestaurant });
-            setIsValidRestaurant(true);
-        }
-    }, [dataValidateRestaurant]);
+        setDataHours(['12:30', '13:00', '14:30']);
+    }, [dataHours2]);
 
-    useEffect(() => {
-        if (isValidRestaurant) {
-            console.log('*** GET CONFIG RESTAURANT');
-            getDataConfigRestaurant('/v2/pokemon/ditto');
-        }
-    }, [isValidRestaurant]);
+    const getBusyHours = (date) => {
+        const formatDate = getFormatDate(date);
+        console.log('**** GET BUSY HOURS', formatDate);
 
-    const setBooking = (data) => {
-        console.log('set booking data --->> ', data);
+        // TODO:
+        getHours('/v2/pokemon/ditto');
+    };
+
+    const updateBooking = (data) => {
+        console.log('>>>> UPDATE BOOKING DATA ---', { ...bookingData, ...data });
+        setBookingData({ ...bookingData, ...data });
     };
 
     return (
         <BookingContext.Provider
             value={{
                 bookingData,
-                configRestaurant: {
-                    data: dataConfigRestaurant,
-                    loading: loadingConfigRestaurant,
-                    error: errorConfigRestaurant
-                },
-                setBooking
+                loadingHours,
+                dataHours,
+                getBusyHours,
+                updateBooking
             }}
         >
-            {loadingValidateRestaurant ? (
-                <p>Cargando...</p>
-            ) : isValidRestaurant && !errorValidateRestaurant ? (
-                children
-            ) : (
-                <p>No tienes permisos para utilizar el widget</p>
-            )}
+            {children}
         </BookingContext.Provider>
     );
 };

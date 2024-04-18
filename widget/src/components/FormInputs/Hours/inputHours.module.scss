@@ -1,0 +1,52 @@
+.contentInputRadio {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+
+    .option {
+        background: none;
+        padding: 7px 15px;
+        margin: 10px;
+        border-radius: 50px;
+        border: 2px solid var(--clr_30);
+
+        &[aria-label='option'] {
+            span {
+                color: var(--clr_30);
+            }
+        }
+
+        &:hover {
+            background: var(--clr_20);
+            border-color: var(--clr_20);
+
+            &[aria-label='option'] {
+                span {
+                    color: var(--clr_100);
+                }
+            }
+        }
+
+        &.disabled {
+            pointer-events: none;
+            background: none;
+            opacity: 0.5;
+        }
+
+        &.selected {
+            background: var(--clr_50);
+            border-color: var(--clr_50);
+
+            &[aria-label='option'] {
+                span {
+                    color: var(--clr_30);
+                }
+            }
+        }
+
+        &.hores {
+            border-width: 1px;
+            margin: 5px;
+        }
+    }
+}

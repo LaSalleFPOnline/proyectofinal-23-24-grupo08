@@ -5,12 +5,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import BookingProvider from './Context/BookingProvider';
+import RestaurantProvider from './Context/RestaurantProvider';
 import { App } from './App';
 
 ReactDOM.createRoot(document.getElementById('dgusta-widget-booking')).render(
     <BrowserRouter>
-        <BookingProvider>
-            <App />
-        </BookingProvider>
+        <RestaurantProvider>
+            <BookingProvider>
+                <App />
+            </BookingProvider>
+        </RestaurantProvider>
     </BrowserRouter>
 );
