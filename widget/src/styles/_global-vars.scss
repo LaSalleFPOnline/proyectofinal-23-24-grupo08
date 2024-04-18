@@ -1,0 +1,17 @@
+// BREAKPOINTS
+$VP_SMALL_MOBILE: '(max-width: 360px)';
+$VP_MOBILE: '(min-width: 361px) and (max-width: 767px)';
+$VP_ALL_MOBILE: '(max-width: 767px)';
+$VP_BEYOND_MOBILE: '(min-width: 768px)';
+$VP_MOBILE_AND_TP: '(max-width: 1023px)';
+$VP_TP: '(min-width: 768px) and (max-width: 1023px)';
+$VP_BEYOND_TP: '(min-width: 1024px)';
+$VP_REGULAR_AND_TL: '(min-width: 1024px) and (max-width: 1279px)';
+$VP_LARGE_NEGATION: '(max-width: 1279px)';
+$VP_LARGE: '(min-width: 1280px)';
+$VP_EXTRA_LARGE_NEGATION: '(max-width: 1439px)';
+$VP_EXTRA_LARGE: '(min-width: 1440px)';
+$VP_SUPER_EXTRA_LARGE: '(min-width: 1921px)';
+$VP_MASTODONTIC: '(min-width: 2144px)';
+$VP_MASTODONTIC_EXTRA: '(min-width: 2160px)';
+$VP_INGENT: '(min-width: 2256px)';

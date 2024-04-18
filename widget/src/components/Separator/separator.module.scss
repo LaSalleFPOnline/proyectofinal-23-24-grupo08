@@ -1,0 +1,28 @@
+.separator {
+    display: inline-flex;
+    margin: 10px 0;
+    width: 30px;
+    height: 2px;
+}
+
+.s {
+    width: 10px;
+}
+.m {
+    width: 30px;
+}
+.l {
+    width: 40px;
+}
+.xl {
+    width: 60px;
+}
+
+.default {
+    background: var(--clr_50);
+}
+
+.full {
+    height: 1px;
+    width: 100%;
+}

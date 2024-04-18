@@ -1,2 +1,11 @@
-.formWidget {
+.contentSteps {
+    position: relative;
+
+    .contentTitle {
+        position: relative;
+    }
+
+    .contentText {
+        margin-top: 30px;
+    }
 }

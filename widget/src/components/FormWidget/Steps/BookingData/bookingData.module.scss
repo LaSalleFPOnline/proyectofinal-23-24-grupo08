@@ -1,0 +1,26 @@
+.contentTitle {
+    position: relative;
+    margin-bottom: 40px;
+
+    .innerContentTitle {
+        padding-bottom: 30px;
+    }
+}
+
+.contentText {
+    p {
+        margin-bottom: 20px;
+    }
+}
+
+.contentFieldForm {
+    margin: 10px 0;
+
+    &.labelFlex {
+        display: flex;
+        vertical-align: middle;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+}

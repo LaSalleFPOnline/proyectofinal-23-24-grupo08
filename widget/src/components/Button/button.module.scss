@@ -1,0 +1,43 @@
+.button {
+    display: inline-flex;
+    line-height: 1;
+    align-items: center;
+    overflow: hidden;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 14px;
+    cursor: pointer;
+    padding: 16px;
+    border-radius: 5px;
+    position: relative;
+    text-decoration: none;
+
+    background: var(--clr_50);
+
+    &:hover {
+        background: var(--clr_20);
+    }
+}
+
+.icon {
+    margin-left: 0;
+    margin-right: 16px;
+    margin-bottom: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: baseline;
+    position: relative;
+
+    &.left {
+        margin-left: 16px;
+        margin-right: 0;
+    }
+
+    &.onlyIcon {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

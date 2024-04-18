@@ -1,0 +1,97 @@
+// CALENDAR
+.calendar {
+    position: absolute;
+    border-radius: 10px;
+    z-index: 4;
+    overflow: hidden;
+    margin-top: 5px;
+
+    button {
+        color: var(--clr_30);
+    }
+
+    .hightlight {
+        background: none;
+        pointer-events: none;
+        position: relative;
+        color: var(--clr_90);
+        opacity: 0.7;
+
+        &::before {
+            content: '';
+            width: 35px;
+            height: 35px;
+            background: var(--clr_20);
+            border-radius: 100%;
+            position: absolute;
+            z-index: -1;
+            top: 1px;
+            left: 7px;
+        }
+    }
+}
+
+.contentCalendar {
+    position: relative;
+
+    .inputCalendari {
+        width: 200px;
+        border: 1px solid var(--clr_30);
+        font-weight: bold;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        cursor: pointer;
+        z-index: 4;
+        position: relative;
+
+        &[aria-label='input-calendar'] {
+            color: var(--clr_30);
+        }
+
+        .iconaCalendari {
+            margin-left: 10px;
+            margin-top: 1px;
+
+            path {
+                fill: var(--clr_30);
+            }
+        }
+
+        &:hover {
+            background-color: var(--clr_20);
+
+            &[aria-label='input-calendar'] {
+                color: var(--clr_100);
+            }
+
+            .iconaCalendari {
+                path {
+                    fill: var(--clr_100);
+                }
+            }
+        }
+    }
+
+    .loadingContainer {
+        position: absolute;
+        top: 52px;
+        left: 0;
+        width: 350px;
+        height: 281px;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    .bgCalendar {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: var(--clr_20);
+        opacity: 0.5;
+        z-index: 3;
+    }
+}
