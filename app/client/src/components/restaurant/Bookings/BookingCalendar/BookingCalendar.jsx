@@ -1,50 +1,86 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import BookingCalendarTables from '../BookingCalendarTables/BookingCalendarTables';
 import './bookingCalendarStyles.css';
+import  bookings  from './content'
+import BookingCards from '../BookingCards/BookingCards';
 
 const BookingCalendar = () => {
-    // Generar las filas de 30 minutos desde las 12 del mediodía hasta las 23 de la noche
-    const generateRows = () => {
-        const rows = [];
-        const startTime = 12 * 60; // 12:00 PM en minutos
-        const endTime = 23 * 60; // 11:00 PM en minutos
-        const interval = 30; // Intervalo de 30 minutos
+    const tablesNumber = 12;
+    const scrollRef = useRef(null);
 
-        for (let time = startTime; time <= endTime; time += interval) {
-            const hour = Math.floor(time / 60);
-            const minute = time % 60;
-            const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    useEffect(() => {
+        const scrollToTime = (time) => {
+            const timeZoneElement = document.getElementById(`timeZone-${time}`);
+            if (timeZoneElement) {
+                timeZoneElement.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        };
 
-            rows.push(
-                <tr key={time}>
-                    <td>{formattedTime}</td>
-                    {/* Aquí puedes agregar las columnas para las mesas */}
-                </tr>
-            );
+        scrollToTime("16:00");
+    }, []);
+
+    const getTimeZones = () => {
+        const timeZones = [];
+        let hour = 12;
+        let minute = 0;
+
+        while (hour <= 23) {
+            const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+            timeZones.push(time);
+
+            if (minute === 30) {
+                hour++;
+                minute = 0;
+            } else {
+                minute = 30;
+            }
         }
 
-        return rows;
-    };
+        return timeZones;
+    }
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Hora</th>
-                    <th>Mesa 1</th>
-                    <th>Mesa 2</th>
-                    <th>Mesa 3</th>
-                    <th>Mesa 4</th>
-                    <th>Mesa 5</th>
-                    <th>Mesa 6</th>
-                    <th>Mesa 7</th>
-                    <th>Mesa 8</th>
-                    <th>Mesa 9</th>
-                </tr>
-            </thead>
-            <tbody>
-                {generateRows()}
-            </tbody>
-        </table>
+        <div className="bookingCalendarMainContainer">
+            <div className="tablesRow">
+                {Array.from({ length: tablesNumber }, (_, i) => (
+                    <BookingCalendarTables key={i} mesa={i + 1} />
+                ))}
+            </div>
+            <div className='bookingsTimeZones'>
+                {getTimeZones().map((time, index) => (
+                    <div key={index} id={`timeZone-${time}`} className='timeZone'>
+                        <p>{time}</p>
+                        <div className='timeZoneForTable'>
+                            {Array.from({ length: tablesNumber }, (_, i) => (
+                                <div key={i} className='bookingOrder' >
+                                    { 
+                                    bookings.filter(booking => booking.bookingTime === time).map((booking, index) => (
+                                        booking.bookingTables[0] === i + 1 ? (
+                                            <BookingCards
+                                            key={index}
+                                            time={booking.bookingTime}
+                                            numberOfPeople={booking.bookingPeople}
+                                            assignedTables={booking.bookingTables}
+                                            reservationName={booking.bookingName}
+                                            width={300 * booking.bookingTables.length}
+                                            left={
+                                                booking.bookingTables.length === 2
+                                                    ? 150 * (booking.bookingTables.length / 2)
+                                                    : booking.bookingTables.length > 2
+                                                        ? 150 * (booking.bookingTables.length - 1)
+                                                        : undefined
+                                            }
+                                            />
+                                        ) : (null)
+                                    ))
+                                    }
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 
