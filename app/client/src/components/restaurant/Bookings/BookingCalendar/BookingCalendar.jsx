@@ -3,11 +3,14 @@ import BookingCalendarTables from '../BookingCalendarTables/BookingCalendarTable
 import './bookingCalendarStyles.css';
 import  bookings  from './content'
 import BookingCards from '../BookingCards/BookingCards';
+import { useData } from '../../../../hooks/useData';
+
 
 const BookingCalendar = () => {
     const tablesNumber = 12;
     const scrollRef = useRef(null);
-
+    const { data: dataBookings, isLoading, hasError, getData: getBookings } = useData();
+    
     useEffect(() => {
         const scrollToTime = (time) => {
             const timeZoneElement = document.getElementById(`timeZone-${time}`);
@@ -15,9 +18,14 @@ const BookingCalendar = () => {
                 timeZoneElement.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         };
-
+        
         scrollToTime("16:00");
+        getBookings('/booking');
     }, []);
+
+    useEffect(() => {
+        console.log("----> DATABOOKING", dataBookings);
+    },[dataBookings])
 
     const getTimeZones = () => {
         const timeZones = [];
@@ -39,7 +47,8 @@ const BookingCalendar = () => {
         return timeZones;
     }
 
-    return (
+    return 
+        dataBookings ? (<p> Loading... </p>) : (
         <div className="bookingCalendarMainContainer">
             <div className="tablesRow">
                 {Array.from({ length: tablesNumber }, (_, i) => (
@@ -54,20 +63,20 @@ const BookingCalendar = () => {
                             {Array.from({ length: tablesNumber }, (_, i) => (
                                 <div key={i} className='bookingOrder' >
                                     { 
-                                    bookings.filter(booking => booking.bookingTime === time).map((booking, index) => (
-                                        booking.bookingTables[0] === i + 1 ? (
+                                    dataBookings.filter(booking => booking.time === time).map((booking, index) => (
+                                        bookings[index].bookingTables[0] === i + 1 ? (
                                             <BookingCards
                                             key={index}
-                                            time={booking.bookingTime}
-                                            numberOfPeople={booking.bookingPeople}
-                                            assignedTables={booking.bookingTables}
-                                            reservationName={booking.bookingName}
-                                            width={300 * booking.bookingTables.length}
+                                            time={booking.time}
+                                            numberOfPeople={booking.guests}
+                                            assignedTables={bookings[index].bookingTables}
+                                            reservationName={booking.name}
+                                            width={300 * bookings[index].bookingTables.length}
                                             left={
-                                                booking.bookingTables.length === 2
-                                                    ? 150 * (booking.bookingTables.length / 2)
-                                                    : booking.bookingTables.length > 2
-                                                        ? 150 * (booking.bookingTables.length - 1)
+                                                bookings[index].bookingTables.length === 2
+                                                    ? 150 * (bookings[index].bookingTables.length / 2)
+                                                    : bookings[index].bookingTables.length > 2
+                                                        ? 150 * (bookings[index].bookingTables.length - 1)
                                                         : undefined
                                             }
                                             />
