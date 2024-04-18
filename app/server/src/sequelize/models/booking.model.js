@@ -7,6 +7,14 @@ module.exports = (sequelize, Sequelize) => {
       autoIncrement: true,
       primaryKey: true,
     },
+    idRestaurant: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "restaurants",
+        key: "id",
+      },
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -17,6 +25,18 @@ module.exports = (sequelize, Sequelize) => {
     },
     guests: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    comments: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     phone: {
@@ -39,10 +59,10 @@ module.exports = (sequelize, Sequelize) => {
 
   Booking.associate = (models) => {
     Booking.hasOne(models.restaurant);
-    Booking.hasOne(models.user);
+    //Booking.hasOne(models.user);
     Booking.hasMany(models.extra);
 
-    Booking.belongsTo(models.user);
+    //Booking.belongsTo(models.user);
     Booking.belongsTo(models.restaurant);
   };
 

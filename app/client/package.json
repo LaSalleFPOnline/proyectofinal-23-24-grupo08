@@ -16,7 +16,6 @@
         "dangerously-set-html-content": "^1.0.13",
         "framer-motion": "^11.0.28",
         "lodash": "^4.17.21",
-        "node-sass": "^9.0.0",
         "query-string": "^8.1.0",
         "react": "^18.2.0",
         "react-calendar": "^4.8.0",

@@ -31,7 +31,11 @@ async function create(req, res) {
       );
   } else {
     await models[entity].create(req.body);
-    res.status(201).end();
+    res.status(200).json({
+      message: "Created succesfully",
+      status: "OK",
+      data: req.body,
+    });
   }
 }
 

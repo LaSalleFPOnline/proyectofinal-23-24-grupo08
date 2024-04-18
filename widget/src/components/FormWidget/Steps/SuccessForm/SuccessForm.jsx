@@ -16,15 +16,15 @@ const SuccessForm = (props) => {
                     <div>
                         <div className={styles.line}>
                             <Icon icon='ico-calendar' alt='dia' size={19} color='fosc' className={styles.resumeIcon} />
-                            <p>{respForm.booking.formatDate}</p>
+                            <p>{respForm.data.date}</p>
                         </div>
                         <div className={styles.line}>
                             <Icon icon='ico-rellotge' alt='horari' size={19} color='fosc' className={styles.resumeIcon} />
-                            <p>{respForm.booking.time}</p>
+                            <p>{respForm.data.time}</p>
                         </div>
                         <div className={styles.line}>
                             <Icon icon='ico-pers' alt='persones' size={19} color='fosc' className={styles.resumeIcon} />
-                            <p>{respForm.booking.numPers} personas</p>
+                            <p>{respForm.data.guests} personas</p>
                         </div>
                     </div>
                 </div>

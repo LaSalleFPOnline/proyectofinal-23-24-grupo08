@@ -16,7 +16,7 @@ const RestaurantProvider = (props) => {
         console.log('restaurant ---> ', idRestaurant);
 
         // TODO: Canviar per la crida correcta
-        getData('/v2/pokemon/ditto');
+        getData('/restaurant/1');
 
         // TODO: Activar similar
         // getData(`/restaurant/${idRestaurant}`);
@@ -24,12 +24,13 @@ const RestaurantProvider = (props) => {
 
     useEffect(() => {
         // TODO: Validar restaurant
+        console.log('---------> data', data);
         // if (data.status === 'OK'){
-        if (data && data.name === 'ditto') {
+        if (data) {
             console.log('*** VALIDATE RESTAURANT');
             // MOCK
             setDataRestaurant({
-                id: 122,
+                id: 1,
                 name: 'can-balsells',
                 calendar: {
                     busyDays: ['2024-04-26'],

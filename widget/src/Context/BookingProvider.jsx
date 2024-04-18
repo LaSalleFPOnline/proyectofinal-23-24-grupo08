@@ -11,7 +11,7 @@ const defaultBookingData = {
     mail: null,
     date: null,
     time: null,
-    numPers: null,
+    guests: null,
     comments: null
 };
 

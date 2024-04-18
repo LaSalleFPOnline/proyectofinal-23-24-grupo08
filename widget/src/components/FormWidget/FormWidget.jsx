@@ -17,9 +17,10 @@ import clsx from 'clsx';
 import styles from './formWidget.module.scss';
 
 const formData = {
+    idRestaurant: 1,
     date: '',
     time: '',
-    numPers: 2,
+    guests: 2,
     comments: '',
     name: '',
     email: '',
@@ -47,7 +48,7 @@ const FormWidget = (props) => {
 
         date,
         time,
-        numPers,
+        guests,
         comments,
         name,
         email,
@@ -56,7 +57,7 @@ const FormWidget = (props) => {
         isFormValid,
         dateValid,
         timeValid,
-        numPersValid,
+        guestsValid,
         commentsValid,
         nameValid,
         emailValid,
@@ -65,7 +66,7 @@ const FormWidget = (props) => {
         responseForm,
         isLoadingForm,
         hasSendingError
-    } = useForm(formData, formValidations, '/bookings');
+    } = useForm(formData, formValidations, '/booking');
 
     const _isFormType = (_type) => {
         return type === _type;
@@ -80,6 +81,7 @@ const FormWidget = (props) => {
     });
 
     useEffect(() => {
+        console.log("------>RES", responseForm);
         if ((responseForm || hasSendingError) && stepActive < numSteps) setStepActive(stepActive + 1);
     }, [responseForm, hasSendingError]);
 
@@ -134,14 +136,14 @@ const FormWidget = (props) => {
                             <PersonalData
                                 onInputChange={onInputChange}
                                 fields={{
-                                    numPers,
+                                    guests,
                                     name,
                                     email,
                                     phone,
                                     comments
                                 }}
                                 fieldsValid={{
-                                    numPersValid,
+                                    guestsValid,
                                     nameValid,
                                     emailValid,
                                     phoneValid,

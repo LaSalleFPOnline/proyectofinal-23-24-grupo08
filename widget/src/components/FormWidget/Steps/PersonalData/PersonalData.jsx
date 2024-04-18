@@ -4,7 +4,7 @@ import styles from './personalData.module.scss';
 
 const PersonalData = (props) => {
     const { onInputChange, fields, fieldsValid, formSubmitted, style } = props;
-    const { name, email, phone, numPers, comments } = fields;
+    const { name, email, phone, guests, comments } = fields;
     const { nameValid, emailValid, phoneValid } = fieldsValid;
 
     return (
@@ -19,7 +19,7 @@ const PersonalData = (props) => {
             </div>
             <div className={`${styles.contentFieldForm} ${styles.labelFlex}`}>
                 <div className={styles.labelBoxSmall}>Numero de personas</div>
-                <FormInput type='number' name='numPers' value={numPers} style={style} onChange={onInputChange} max={10} />
+                <FormInput type='number' name='guests' value={guests} style={style} onChange={onInputChange} max={10} />
             </div>
             <div className={styles.contentFieldForm}>
                 <FormInput

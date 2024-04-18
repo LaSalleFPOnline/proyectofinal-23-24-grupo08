@@ -12,7 +12,7 @@ const ExampleApiUsagePost = (props) => {
 
 		const params = {
 			date: "2024-05-20",
-			numPers: 5,
+			guests: 5,
 			name: "Paco",
 		};
 		postData("/v2/pokemon/ditto", params);

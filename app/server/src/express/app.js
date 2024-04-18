@@ -24,6 +24,8 @@ function makeHandlerAwareOfAsyncErrors(handler) {
   return async function (req, res, next) {
     try {
       await handler(req, res);
+      console.log("-----> RES", res);
+      console.log("------>REQ", req);
     } catch (error) {
       next(error);
     }
