@@ -1,7 +1,11 @@
 import React from 'react';
 import './configurationPersonalDataStyles.css';
+import { useUser } from "../../../../hooks/useUser";
 
 function ConfigurationPersonalData() {
+
+    const { name, email } = useUser();
+
     return (
         <div className='personalDataMainContainer'>
             <h2>INFORMACION PERSONAL</h2>
@@ -9,7 +13,7 @@ function ConfigurationPersonalData() {
                 <div className="personalDataRow">
                     <div className="personalDataItem">
                         <label>Nombre:</label>
-                        <input type="text" name="name" />
+                        <input type="text" name="name" value={name}/>
                     </div>
                     <div className="personalDataItem">
                         <label>Apellidos:</label>
@@ -19,7 +23,7 @@ function ConfigurationPersonalData() {
                 <div className="personalDataRow">
                     <div className="personalDataItem">
                         <label>Email:</label>
-                        <input type="text" name="email" />
+                        <input type="text" name="email" value={email}/>
                     </div>
                     <div className="personalDataItem">
                         <label>Telefono:</label>

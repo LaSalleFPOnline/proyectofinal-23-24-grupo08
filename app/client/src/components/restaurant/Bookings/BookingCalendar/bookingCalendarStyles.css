@@ -1,37 +1,50 @@
-
-th, td {
-    min-width: 250px; 
+.bookingCalendarMainContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
-
-.table-wrapper {
-    overflow-x: auto;
-    white-space: nowrap; 
-}
-
-table {
-    width: auto;
-    border-collapse: collapse;
-}
-
-thead th {
-    background-color: #f2f2f2;
+.tablesRow {
+    display: flex;
+    flex-direction: row;
+    padding-left: 100px;
     position: sticky;
     top: 0;
+    background-color: #eceef0;
     z-index: 1;
 }
 
-thead th,
-tbody td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
 
-tbody tr{
+.timeZone{
     height: 100px;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    background-color: #30bfe61f;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+.timeZoneForTable{
+    display: flex;
+    flex-direction: row;
+}
+
+.timeZone > p {
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.288);
+}
+
+.bookingOrder{
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid rgba(0, 0, 0, 0.288);
+    border-top: 1px solid rgba(0, 0, 0, 0.288);
 }

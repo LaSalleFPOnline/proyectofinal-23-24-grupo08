@@ -21,5 +21,5 @@ const configNavItems = [
     }
 ];
   
-  export default configNavItems;
+export default configNavItems;
   
