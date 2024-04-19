@@ -4,11 +4,12 @@ import './bookingCalendarStyles.css';
 import bookings from './content';
 import BookingCards from '../BookingCards/BookingCards';
 import { useData } from '../../../../hooks/useData';
+import { getFormatTime } from '../../../../helpers/dateHelper';
 
-const BookingCalendar = () => {
+const BookingCalendar = (props) => {
+    const { dataBookings } = props;
     const tablesNumber = 12;
     const scrollRef = useRef(null);
-    const { data: dataBookings, isLoading, hasError, getData: getBookings } = useData();
 
     useEffect(() => {
         const scrollToTime = (time) => {
@@ -19,12 +20,7 @@ const BookingCalendar = () => {
         };
 
         scrollToTime('16:00');
-        getBookings('/booking');
     }, []);
-
-    useEffect(() => {
-        console.log('----> DATABOOKING', dataBookings);
-    }, [dataBookings]);
 
     const getTimeZones = () => {
         const timeZones = [];
@@ -48,7 +44,7 @@ const BookingCalendar = () => {
 
     return (
         <>
-            {dataBookings ? (
+            {!dataBookings ? (
                 <p> Loading... </p>
             ) : (
                 <div className='bookingCalendarMainContainer'>
@@ -65,9 +61,9 @@ const BookingCalendar = () => {
                                     {Array.from({ length: tablesNumber }, (_, i) => (
                                         <div key={i} className='bookingOrder'>
                                             {dataBookings
-                                                .filter((booking) => booking.time === time)
-                                                .map((booking, index) =>
-                                                    bookings[index].bookingTables[0] === i + 1 ? (
+                                                .filter((booking) => booking.time === getFormatTime(time))
+                                                .map((booking, index) => {
+                                                    return bookings[index].bookingTables[0] === i + 1 ? (
                                                         <BookingCards
                                                             key={index}
                                                             time={booking.time}
@@ -83,8 +79,8 @@ const BookingCalendar = () => {
                                                                       : undefined
                                                             }
                                                         />
-                                                    ) : null
-                                                )}
+                                                    ) : null;
+                                                })}
                                         </div>
                                     ))}
                                 </div>
