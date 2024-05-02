@@ -6,7 +6,6 @@ const LandingLayout = ({ children }) => {
 	return (
 		<>
 			<Navigation />
-			<p>Landing layout</p>
 			<main>{children}</main>
 			<Footer />
 		</>

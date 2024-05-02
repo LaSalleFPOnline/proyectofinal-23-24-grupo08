@@ -1,24 +1,22 @@
 import React from "react";
 import { footerContent, footerTitle } from "./content";
+import styles from './footer.module.css';
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-800 py-4">
-      <div className="container mx-auto flex justify-between items-center py-3 my-4 border-t">
-        <div className="w-full md:w-1/2 md:flex items-center">
-          <span className="text-muted text-white">{footerTitle}</span>
+    <footer> 
+      {footerContent.map((section, index) => (
+        <div key={index} className={styles.footerSections}>
+          <span className={styles.sectionTitles}>{section.section}</span>
+          <ul>
+            {section.links.map((link, linkIndex) => (
+              <li key={linkIndex}>
+                <a href={link.href}>{link.name}</a>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        {footerContent.map((item) => (
-          <a
-            key={item.name}
-            href={item.href}
-            className="text-blue-500 hover:text-blue-800 mr-4"
-          >
-            {item.name}
-          </a>
-        ))}
-      </div>
+      ))}
     </footer>
   );
 };

@@ -11,7 +11,7 @@ import { useUser } from '../../hooks/useUser';
 import { useState } from 'react';
 import { Button } from '../button/Button';
 
-export const FormRegister = () => {
+export const FormRegister = ({plan}) => {
     const methods = useForm();
     const { signUp } = useUser();
 
@@ -55,7 +55,7 @@ export const FormRegister = () => {
         <FormProvider {...methods}>
             <form onSubmit={(e) => e.preventDefault()} noValidate autoComplete='off'>
                 <div className='mb-12'>
-                    <h1 className='text-3xl font-bold mb-2'>Registra tu restaurante</h1>
+                    <h1 className='text-3xl font-bold mb-2'>Registra tu restaurante - {plan}</h1>
                     <p className='text-sm text-gray-500	font-bold'>Accede de forma ràpida a DGusta</p>
                 </div>
                 <div className='border-black'>
