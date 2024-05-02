@@ -21,6 +21,8 @@ const bookingController = {
     },
     getRestaurantBookingsByHour: async (idRestaurant, date, time) => {
         try {
+            date = new Date(date);
+
             const bookings = await Booking.findAll({
                 where: {
                     idRestaurant,
@@ -65,10 +67,20 @@ const bookingController = {
     create: async (req, res) => {
         const { idRestaurant, date, time, guests, comments, name, email, phone } = req.body;
         const { restaurantController } = controllers;
-        const capacity = await restaurantController.getCapacity(idRestaurant);
-        console.log('CRETE BOOKING > RESTAURANT CAPACITY ', capacity);
 
         try {
+            await Promise.resolve();
+
+            const capacity = await restaurantController.getCapacity(idRestaurant);
+            const hourBookings = await bookingController.getRestaurantBookingsByHour(idRestaurant, date, time);
+            const totalGuests = hourBookings?.reduce((total, booking) => {
+                return total + booking.guests;
+            }, 0);
+            console.log('CRETE BOOKING > RESTAURANT CAPACITY ', { capacity, totalGuests });
+            if (totalGuests >= capacity) {
+                // TODO: Setejar la hora del dia com a ocupats a la taula d'hores
+            }
+
             const newBooking = await Booking.create({ idRestaurant, date, time, guests, comments, name, email, phone });
             res.status(201).json({
                 status: 'OK',
@@ -90,7 +102,7 @@ const bookingController = {
             if (!updated) {
                 return res.status(404).json({ status: 'KO', message: 'Booking no encontrado' });
             }
-            res.json({ message: 'Booking actualizado correctamente' });
+            res.json({ status: 'OK', message: 'Booking actualizado correctamente' });
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al actualizar el booking' });
         }
@@ -103,7 +115,7 @@ const bookingController = {
             if (!deleted) {
                 return res.status(404).json({ status: 'KO', message: 'Booking no encontrado' });
             }
-            res.json({ message: 'Booking eliminado correctamente' });
+            res.json({ status: 'OK', message: 'Booking eliminado correctamente' });
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al eliminar el booking' });
         }

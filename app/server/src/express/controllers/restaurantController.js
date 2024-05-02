@@ -52,14 +52,13 @@ const restaurantController = {
         try {
             const bookings =
                 date && time
-                    ? await bookingController.getRestaurantBookingsByHour(id, date, time)
+                    ? await bookingController.getRestaurantBookingsByHour(id, date, `${time}:00`)
                     : await bookingController.getByRestaurant(id);
             res.json({
-                status: 'OK bookings by hour',
+                status: 'OK',
                 data: bookings
             });
         } catch (error) {
-            console.error('BOOKINGS RESTAURANT:', error);
             res.status(500).json({ status: 'KO', message: 'Error al obtener las bookings del restaurante' });
         }
     },
@@ -76,6 +75,16 @@ const restaurantController = {
             res.status(500).json({ status: 'KO', message: 'Error al crear un nuevo booking', error });
         }
     },
+    createFromRegister: async (params) => {
+        const { userId, name, slug } = params;
+        try {
+            const newRestaurant = await Restaurant.create({ userId, name, slug });
+            return newRestaurant;
+        } catch (error) {
+            console.log('ERROR CREATE FROM REGISTER RESTAURANTB >> ', error);
+            return false;
+        }
+    },
 
     update: async (req, res) => {
         const { id } = req.params;
@@ -88,7 +97,7 @@ const restaurantController = {
             if (!updated) {
                 return res.status(404).json({ status: 'KO', message: 'Restaurant no encontrado' });
             }
-            res.json({ message: 'Restaurant actualizado correctamente' });
+            res.json({ status: 'OK', message: 'Restaurant actualizado correctamente' });
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al actualizar el boRestaurantoking' });
         }
@@ -101,7 +110,7 @@ const restaurantController = {
             if (!deleted) {
                 return res.status(404).json({ status: 'KO', message: 'Restaurant no encontrado' });
             }
-            res.json({ message: 'Restaurant eliminado correctamente' });
+            res.json({ status: 'OK', message: 'Restaurant eliminado correctamente' });
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al eliminar el Restaurant' });
         }

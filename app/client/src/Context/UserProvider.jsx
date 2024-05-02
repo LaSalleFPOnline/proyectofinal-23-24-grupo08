@@ -26,15 +26,19 @@ const getInitUser = () => {
 const UserProvider = (props) => {
     const { children } = props;
     const [userData, setUserData] = useState({ ...getInitUser() });
-    const { data: dataLogin, isLoading, hasError, postData: getLogin } = useData();
+    const { data: dataLogin, isLoading, hasError, postData: postLogin } = useData();
+    const { data: dataRegister, isLoading: isLoadingRegister, hasError: hasErrorRegister, postData: postRegister } = useData();
 
     const navigate = useNavigate();
 
-    const signUp = () => {};
+    const signUp = (params) => {
+        console.log('sign up >> ', params);
+        postLogin('/register', params);
+    };
 
     const signIn = (params) => {
         const { email, password } = params;
-        getLogin('/login', { username: email, password });
+        postLogin('/login', { username: email, password });
         // TODO login por AccessToken
 
         // MOCKS
@@ -81,6 +85,10 @@ const UserProvider = (props) => {
     useEffect(() => {
         console.log('data login >>> ', dataLogin);
     }, [dataLogin]);
+
+    useEffect(() => {
+        console.log('data register >>> ', dataRegister);
+    }, [dataRegister]);
 
     useEffect(() => {
         console.log('*** USER PROVIDER user data --> ', userData);

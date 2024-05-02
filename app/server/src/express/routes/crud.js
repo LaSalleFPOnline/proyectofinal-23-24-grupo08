@@ -1,5 +1,5 @@
 const { models } = require('../../sequelize');
-const { getIdParam, getRouteParams } = require('../helpers');
+const { getIdParam, getRouteParams } = require('../../helpers/routeHelpers');
 
 async function getAll(req, res) {
     const entity = getRouteParams(req);
