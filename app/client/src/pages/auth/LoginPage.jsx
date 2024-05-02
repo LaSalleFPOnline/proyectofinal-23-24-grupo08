@@ -45,14 +45,14 @@ export default function LoginPage(props) {
                 <div className='w-64'>
                     <input
                         value={email}
-                        placeholder='Enter your email here'
+                        placeholder='Usuario'
                         onChange={(ev) => setEmail(ev.target.value)}
                         className='block w-full px-4 py-2 mb-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                     />
                     <label className='text-red-600 text-sm mt-2'>{emailError}</label>
                     <input
                         value={password}
-                        placeholder='Enter your password here'
+                        placeholder='Password'
                         onChange={(ev) => setPassword(ev.target.value)}
                         type='password'
                         className='block w-full px-4 py-2 mb-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
@@ -65,7 +65,7 @@ export default function LoginPage(props) {
                         className='flex justify-center w-full py-2 mt-4 text-sm font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700'
                         onClick={onButtonClick}
                     >
-                        Log in
+                        Acceder
                     </button>
                 </div>
             </div>
