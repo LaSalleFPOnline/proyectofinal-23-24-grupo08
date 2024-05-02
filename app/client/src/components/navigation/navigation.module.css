@@ -1,0 +1,36 @@
+.navBar{
+    background-color: var(--primary-color);
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10%;
+    color: #FFFF;
+}
+
+.navBar span {
+    font-size: 2.2rem;
+    font-weight: lighter;
+}
+
+.navButtons{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+
+.navButtons a, 
+.navButtons button{
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navButtons button{
+    background-color: var(--primary-button-color);
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+}

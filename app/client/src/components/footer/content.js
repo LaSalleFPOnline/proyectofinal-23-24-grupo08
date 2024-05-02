@@ -2,11 +2,66 @@ export const footerTitle = "© 2024 Patata, Inc";
 
 export const footerContent = [
 	{
-		name: "Privacy Policy",
-		href: "#",
+		section: "Compañia",
+		links: [
+			{
+				name: "Nosotros",
+				hred: "#"
+			},
+			{
+				name: "Nuestros servicios",
+				hred: "#"
+			},
+			{
+				name: "Politica de privacidad",
+				hred: "#"
+			},
+			{
+				name: "Afilicacion",
+				hred: "#"
+			}
+		]
 	},
 	{
-		name: "Terms of Service",
-		href: "#",
+		section: "Ayuda",
+		links: [
+			{
+				name: "Preguntas",
+				hred: "#"
+			},
+			{
+				name: "Compras",
+				hred: "#"
+			},
+			{
+				name: "Pagos",
+				hred: "#"
+			},
+			{
+				name: "Soporte",
+				hred: "#"
+			}
+		]
 	},
+	{
+		section: "Siguenos",
+		links: [
+			{
+				name: "Preguntas",
+				hred: "#"
+			},
+			{
+				name: "Compras",
+				hred: "#"
+			},
+			{
+				name: "Pagos",
+				hred: "#"
+			},
+			{
+				name: "Soporte",
+				hred: "#"
+			}
+		]
+	}
 ];

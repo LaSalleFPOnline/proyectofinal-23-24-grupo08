@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 // TODO: refactor this component to use the useUser hook
 
-export const FormRegister = () => {
+export const FormRegister = ({plan}) => {
   const methods = useForm();
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
@@ -56,7 +56,7 @@ export const FormRegister = () => {
     <FormProvider {...methods}>
       <form onSubmit={(e) => e.preventDefault()} noValidate autoComplete="off">
         <div className="mb-12">
-          <h1 className="text-3xl font-bold mb-2">Welcome</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome - {plan}</h1>
           <p className="text-sm text-gray-500	font-bold">
             Let's start with your data
           </p>

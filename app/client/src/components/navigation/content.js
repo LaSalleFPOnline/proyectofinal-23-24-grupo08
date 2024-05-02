@@ -1,8 +1,8 @@
-export const title = "Patatas site";
+export const title = "DGUSTA";
 
 export const navigation = [
 	{
-		name: "Features",
+		name: "DgustaApp",
 		href: "#features",
 	},
 	{
@@ -10,11 +10,7 @@ export const navigation = [
 		href: "#",
 	},
 	{
-		name: "Documentation",
+		name: "About Us",
 		href: "#",
-	},
-	{
-		name: "Blog",
-		href: "#",
-	},
+	}
 ];
