@@ -2,25 +2,24 @@
 
 ## Description
 
-
 ## Features
 
-- API (CRUD)
+-   API (CRUD)
 
 ## Technologies Used
 
-- Docker
-- Express
-- Sequelize (ORM)
-- PostgreSQL
+-   Docker
+-   Express
+-   Sequelize (ORM)
+-   PostgreSQL
 
 ## Getting Started
 
 ### Prerequisites
 
-- Docker
-- Node min 18.19.1v
-- NPM
+-   Docker
+-   Node min 18.19.1v
+-   NPM
 
 ### Installation
 
@@ -28,7 +27,7 @@
 2. Install dependencies in `./proyectofinal-23-24-grupo08/app/server/`
 
 ```
-npm install 
+npm install
 ```
 
 3. In same path initialize docker compose:
@@ -37,7 +36,7 @@ npm install
 docker compose down && docker compose up
 ```
 
-4. Initialize Express server: 
+4. Initialize Express server:
 
 ```
 npx nodemon src/server.js
@@ -49,7 +48,16 @@ npx nodemon src/server.js
 2. https://locahost:9000/api/user
 3. ...
 
+## PG Admin
+
+[http://localhost:8082/browser/](http://localhost:8082/browser/)
+
 ## API Documentation
+
+### getUser
+
+-   endpoint: `/user`
+-   params
 
 Explain how to use the API and provide examples.
 
@@ -59,9 +67,8 @@ Explain how others can contribute to the project.
 
 ## License
 
-
 ## Acknowledgments
 
-- Acknowledgment 1
-- Acknowledgment 2
-- ...
+-   Acknowledgment 1
+-   Acknowledgment 2
+-   ...
