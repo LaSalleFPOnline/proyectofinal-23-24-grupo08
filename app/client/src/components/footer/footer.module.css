@@ -1,0 +1,30 @@
+footer {
+    width: 100vw;
+    height: 60vh;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 18%;
+    color: #ffff;
+}
+
+.sectionTitles{
+    font-size: 1.3rem;
+    border-bottom: 2px solid #FAD628;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.footerSections{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.footerSections ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

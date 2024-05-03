@@ -1,0 +1,90 @@
+#root{
+    overflow-x: hidden;
+}
+
+.landingMainSection{
+    width: 100vw;
+    height: 85vh;
+    background-image: url('Background.png');
+    background-size: cover, contain;
+    padding-top: 10%;
+}
+
+.landingMainSection h1{
+    line-height: 2ch;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.landingMainSection p{
+    line-height: 2ch;
+    font-weight: 100;
+    color: #2a5865b7;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.landingMainSectionButton{
+    margin-top: 50px;
+    background-color: var(--primary-button-color);
+    padding: 12px 50px;
+    font-size: 22px;
+    border-radius: 6px;
+    color: #ffff;
+    font-weight: 700;
+    margin-left: 10%;
+}
+
+.landingMainSection h1, 
+.landingMainSection p{
+    margin-left: 10%;
+}
+
+.firstSeparator{
+    width: 100%;
+    height: 20%;
+    background-color: var(--primary-color);
+    position: absolute;
+    clip-path: polygon(0% 99%, 0 0, 20% 3%, 35% 45%, 100% 68%, 100% 100%);
+    bottom: 0px;
+}
+
+.priceSection{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    background-color: var(--primary-color);
+    padding: 8% 10%;
+    gap: 150px;
+    justify-content: center;
+    border: none;
+}
+
+.priceSection h2{
+    text-align: center;
+    font-size: 40px;
+    color: #ffff;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+}
+
+.aboutAppSection{
+    padding: 15% 10% 5% 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.secondSeparator{
+    width: 100%;
+    height: 20%;
+    background-color: var(--primary-color);
+    position: absolute;
+    clip-path: polygon(100% 0%, 100% 100%, 80% 97%, 65% 55%, 0% 32%, 0% 0%);
+    border: none;
+}
