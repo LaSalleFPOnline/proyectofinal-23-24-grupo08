@@ -7,7 +7,7 @@ export default function LoginPage(props) {
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const { signIn } = useUser();
+    const { signIn, errorLogin } = useUser();
 
     const onButtonClick = (e) => {
         e.preventDefault();
@@ -15,25 +15,25 @@ export default function LoginPage(props) {
         setEmailError('');
         setPasswordError('');
 
-        // if ("" === email) {
-        // 	setEmailError("Please enter your email");
-        // 	return;
-        // }
+        if ('' === email) {
+            setEmailError('Introduce tu email');
+            return;
+        }
 
-        // if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-        // 	setEmailError("Please enter a valid email");
-        // 	return;
-        // }
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+            setEmailError('Introduce un email válido');
+            return;
+        }
 
-        // if ("" === password) {
-        // 	setPasswordError("Please enter a password");
-        // 	return;
-        // }
+        if ('' === password) {
+            setPasswordError('Introduce un password');
+            return;
+        }
 
-        // if (password.length < 7) {
-        // 	setPasswordError("The password must be 8 characters or longer");
-        // 	return;
-        // }
+        if (password.length < 7) {
+            setPasswordError('El password ha de tener 8 o más caracteres');
+            return;
+        }
 
         signIn({ email, password });
     };
@@ -45,7 +45,7 @@ export default function LoginPage(props) {
                 <div className='w-64'>
                     <input
                         value={email}
-                        placeholder='Usuario'
+                        placeholder='Email'
                         onChange={(ev) => setEmail(ev.target.value)}
                         className='block w-full px-4 py-2 mb-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                     />
@@ -58,9 +58,7 @@ export default function LoginPage(props) {
                         className='block w-full px-4 py-2 mb-2 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                     />
                     <label className='text-red-600 text-sm mt-2'>{passwordError}</label>
-                    {emailError || passwordError ? (
-                        <div className='text-red-600 text-sm mt-2'>Invalid email or password</div>
-                    ) : null}
+                    {errorLogin && <div className='text-red-600 text-sm mt-2'>Email o password incorrecto</div>}
                     <button
                         className='flex justify-center w-full py-2 mt-4 text-sm font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700'
                         onClick={onButtonClick}

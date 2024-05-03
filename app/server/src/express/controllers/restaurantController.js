@@ -15,7 +15,20 @@ const restaurantController = {
             return false;
         }
     },
-
+    getByUserId: async (userId) => {
+        try {
+            const restaurant = await Restaurant.findOne({
+                where: {
+                    userId
+                }
+            });
+            if (!restaurant) return false;
+            return restaurant;
+        } catch (error) {
+            console.error('Error al obtener el restaurant por user ID:', error);
+            return false;
+        }
+    },
     getAll: async (req, res) => {
         try {
             const restaurants = await Restaurant.findAll();
@@ -27,7 +40,6 @@ const restaurantController = {
             res.status(500).json({ status: 'KO', message: 'Error al obtener los Restaurant' });
         }
     },
-
     getById: async (req, res) => {
         const { id } = req.params;
         try {
@@ -44,7 +56,6 @@ const restaurantController = {
             res.status(500).json({ status: 'KO', message: 'Error al obtener el Restaurant por ID' });
         }
     },
-
     getRestaurantBookings: async (req, res) => {
         const { id } = req.params;
         const { date, time } = req.query;

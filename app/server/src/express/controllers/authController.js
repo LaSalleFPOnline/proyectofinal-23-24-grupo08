@@ -2,7 +2,7 @@ const sequelize = require('../../sequelize');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { getSlug } = require('../../helpers/stringHelpers');
-const { user: User } = sequelize.models;
+
 let controllers = null;
 
 const authController = {
@@ -11,43 +11,81 @@ const authController = {
     },
     login: async (req, res) => {
         const { email, password } = req.body;
-        const { userController } = controllers;
+        const { userController, restaurantController } = controllers;
 
         try {
             const user = await userController.getByEmail(email);
-            console.log('USER BY EMAIL >> ', user);
+            if (!user) {
+                res.status(200).json({
+                    status: 'KO',
+                    message: 'Email incorrecto'
+                });
+                return;
+            }
 
             bcrypt.hash(password, 10, (err, hash) => {
                 if (err) {
-                    res.status(500).json({ message: 'Error' });
+                    res.status(500).json({ status: 'KO', message: 'Error' });
+                    return;
                 } else {
                     bcrypt.compare(user.password, hash, (err, result) => {
                         if (err) {
-                            res.status(500).json({ message: 'Error' });
+                            res.status(500).json({
+                                status: 'KO',
+                                error: err,
+                                message: 'error password'
+                            });
+                            return;
                         } else {
-                            jwt.sign({ user }, 'secretKey', { expiresIn: '1h' }, (err, token) => {
-                                if (err) {
-                                    res.status(500).json({ message: 'Error al firmar el token' });
-                                } else {
-                                    const role = 2;
+                            if (!result) {
+                                res.status(200).json({
+                                    status: 'KO',
+                                    message: 'password incorrecto'
+                                });
+                                return;
+                            }
 
-                                    if (role === 2) {
-                                        // Buscar dades restaurant
+                            jwt.sign({ user }, 'secretKey', { expiresIn: '1h' }, async (err, token) => {
+                                if (err) {
+                                    res.status(500).json({ status: 'KO', message: 'Error al firmar el token' });
+                                } else {
+                                    console.log('user >>> ', { id: user.id, rol: user.rol });
+                                    if (user.rol === 2) {
+                                        const restaurant = await restaurantController.getByUserId(user.id);
+
+                                        res.status(200).json({
+                                            status: 'OK',
+                                            message: 'Login correcto con token',
+                                            token,
+                                            data: {
+                                                userId: user.id,
+                                                email: user.email,
+                                                firstName: user.firstName,
+                                                lastName: user.lasttName,
+                                                restaurantId: restaurant.id,
+                                                slug: restaurant.slug,
+                                                role: 2,
+                                                validate: restaurant.validate,
+                                                isRestaurant: true,
+                                                isAdmin: false
+                                            }
+                                        });
+                                    } else {
+                                        res.status(200).json({
+                                            status: 'OK',
+                                            message: 'Login correcto con token',
+                                            token,
+                                            data: {
+                                                userId: user.id,
+                                                email: user.email,
+                                                firstName: user.firstName,
+                                                lastName: user.lasttName,
+                                                role: 1,
+                                                isRestaurant: false,
+                                                isAdmin: true
+                                            }
+                                        });
                                     }
-                                    res.status(200).json({
-                                        message: 'Login correcto con token',
-                                        token,
-                                        data: {
-                                            id: 4234,
-                                            slug: 'can-balsells',
-                                            role: role,
-                                            isRestaurant: role === 2,
-                                            isAdmin: role === 1
-                                        },
-                                        status: 'OK'
-                                    });
-                                    //Comprobación de que imprime el hash correctamente
-                                    //console.log("------>Hash: ", hash);
                                 }
                             });
                         }
@@ -55,7 +93,6 @@ const authController = {
                 }
             });
         } catch (error) {
-            // Manejar cualquier error interno
             console.error('Error al iniciar sesión', error);
             res.status(500).json({
                 message: 'Error interno',

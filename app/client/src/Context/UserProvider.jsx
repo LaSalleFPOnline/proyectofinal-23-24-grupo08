@@ -6,11 +6,11 @@ export const UserContext = createContext();
 
 const defaultUserData = {
     accessToken: null,
-    name: null,
-    id: null,
+    userId: null,
+    restaurantId: null,
     email: null,
-    username: null,
-    surname: null,
+    slug: null,
+    validate: null,
     role: null,
     isAuthenticated: null,
     isRestaurant: null,
@@ -20,12 +20,16 @@ const defaultUserData = {
 
 const getInitUser = () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    // const user = JSON.parse(btoa(localStorage.getItem('user')));
+    console.log('GET INIT USER >> ', { user, user });
     return user || defaultUserData;
 };
 
 const UserProvider = (props) => {
     const { children } = props;
     const [userData, setUserData] = useState({ ...getInitUser() });
+    const [errorLogin, setErrorLogin] = useState(false);
+    const [errorRegister, setErrorRegister] = useState(false);
     const { data: dataLogin, isLoading, hasError, postData: postLogin } = useData();
     const { data: dataRegister, isLoading: isLoadingRegister, hasError: hasErrorRegister, postData: postRegister } = useData();
 
@@ -33,48 +37,12 @@ const UserProvider = (props) => {
 
     const signUp = (params) => {
         console.log('sign up >> ', params);
-        postLogin('/register', params);
+        postRegister('/register', params);
     };
 
     const signIn = (params) => {
         const { email, password } = params;
-        postLogin('/login', { username: email, password });
-        // TODO login por AccessToken
-
-        // MOCKS
-        let userDataMock = {
-            accessToken: 'asd9239fjhjasid99ehskafbsjdfkas',
-            name: 'nameAuthenticated',
-            id: 12,
-            email,
-            username: 'can-balcells',
-            surname: 'Balcells',
-            role: 2,
-            isAuthenticated: true,
-            isRestaurant: true,
-            isAdmin: false,
-            state: 1
-        };
-
-        if (email === 'admin@dgusta.com') {
-            userDataMock = {
-                accessToken: 'asd9239fjhjasid99ehskafbsjdfkas',
-                name: 'nameAuthenticated',
-                id: 1,
-                email,
-                username: 'admin',
-                surname: 'Admin',
-                role: 1,
-                isAuthenticated: true,
-                isRestaurant: false,
-                isAdmin: true,
-                state: 1
-            };
-        }
-        setUserData(userDataMock);
-        navigate('/', {
-            replace: true
-        });
+        postLogin('/login', { email, password });
     };
 
     const signOut = () => {
@@ -82,24 +50,74 @@ const UserProvider = (props) => {
         localStorage.removeItem('user');
     };
 
+    const setUserDataAuthenticated = (data) => {
+        setUserData({
+            accessToken: data.token,
+            isAuthenticated: true,
+            ...data.data
+        });
+    };
+
     useEffect(() => {
-        console.log('data login >>> ', dataLogin);
+        if (dataLogin) {
+            console.log('data login >>> ', { dataLogin });
+            if (dataLogin?.status === 'OK') {
+                setErrorLogin(false);
+                setUserDataAuthenticated(dataLogin);
+
+                const { isRestaurant, slug } = dataLogin.data;
+
+                if (isRestaurant) {
+                    navigate(`/${slug}`, {
+                        replace: true
+                    });
+                } else {
+                    navigate(`/admin`, {
+                        replace: true
+                    });
+                }
+            } else {
+                signOut();
+                setErrorLogin(dataLogin.message);
+                console.log('ERROR LOGIN >> ', dataLogin.message);
+            }
+        }
     }, [dataLogin]);
 
     useEffect(() => {
-        console.log('data register >>> ', dataRegister);
+        if (dataRegister) {
+            console.log('data register >>> ', dataRegister);
+            if (dataRegister?.status === 'OK') {
+                setUserDataAuthenticated(dataRegister);
+                const { isRestaurant, slug } = dataLogin.data;
+
+                if (isRestaurant) {
+                    navigate(`/${slug}/configuracion`, {
+                        replace: true
+                    });
+                } else {
+                    navigate(`/admin`, {
+                        replace: true
+                    });
+                }
+            } else {
+                console.log('ERROR REGISTER');
+            }
+        }
     }, [dataRegister]);
 
     useEffect(() => {
-        console.log('*** USER PROVIDER user data --> ', userData);
         const { isAuthenticated } = userData;
-        if (isAuthenticated) localStorage.setItem('user', JSON.stringify(userData));
+        if (isAuthenticated) {
+            localStorage.setItem('user', JSON.stringify(userData));
+        }
     }, [userData]);
 
     return (
         <UserContext.Provider
             value={{
                 ...userData,
+                errorLogin,
                 signUp,
                 signIn,
                 signOut
