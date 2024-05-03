@@ -1,38 +1,40 @@
-import { useContext } from "react";
-import { UserContext } from "../Context/UserProvider";
+import { useContext } from 'react';
+import { UserContext } from '../Context/UserProvider';
 
 export const useUser = () => {
-	const {
-		accessToken,
-		name,
-		id,
-		email,
-		username,
-		surname,
-		role,
-		isAuthenticated,
-		isRestaurant,
-		isAdmin,
-		state,
-		signUp,
-		signIn,
-		signOut,
-	} = useContext(UserContext);
+    const {
+        accessToken,
+        userId,
+        restaurantId,
+        email,
+        slug,
+        validate,
+        role,
+        isAuthenticated,
+        isRestaurant,
+        isAdmin,
 
-	return {
-		accessToken,
-		name,
-		id,
-		email,
-		username,
-		surname,
-		role,
-		isAuthenticated,
-		isRestaurant,
-		isAdmin,
-		state,
-		signUp,
-		signIn,
-		signOut,
-	};
+        errorLogin,
+        signUp,
+        signIn,
+        signOut
+    } = useContext(UserContext);
+
+    return {
+        accessToken,
+        userId,
+        restaurantId,
+        email,
+        slug,
+        validate,
+        role,
+        isAuthenticated,
+        isRestaurant,
+        isAdmin,
+
+        errorLogin,
+        signUp,
+        signIn,
+        signOut
+    };
 };
