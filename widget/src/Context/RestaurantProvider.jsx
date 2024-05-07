@@ -12,26 +12,17 @@ const RestaurantProvider = (props) => {
 
     useLayoutEffect(() => {
         const root = document.querySelector('#dgusta-widget-booking');
-        const idRestaurant = root.dataset.restaurant;
-        console.log('restaurant ---> ', idRestaurant);
-
-        // TODO: Canviar per la crida correcta
-        getData('/restaurant/1');
-
-        // TODO: Activar similar
-        // getData(`/restaurant/${idRestaurant}`);
+        const widgetCode = root.dataset.restaurant;
+        console.log(' widgetCode restaurant ---> ', widgetCode);
+        getData(`/restaurant/widgetValidation?widgetCode=${widgetCode}`);
     }, []);
 
     useEffect(() => {
-        // TODO: Validar restaurant
-        console.log('---------> data', data);
-        // if (data.status === 'OK'){
-        if (data) {
-            console.log('*** VALIDATE RESTAURANT');
-            // MOCK
+        if (data?.status === 'OK') {
+            console.log('*** VALIDATE RESTAURANT >> ', data);
+            // TODO: Treure mock configuració
             setDataRestaurant({
-                id: 1,
-                name: 'can-balsells',
+                ...data.data,
                 calendar: {
                     busyDays: ['2024-04-26'],
                     daysClose: [1],
@@ -48,7 +39,6 @@ const RestaurantProvider = (props) => {
                         }
                     }
                 },
-
                 style: {
                     colors: ['#473150', '#6a3f61', '#a25b81', '#f1829f', '#f8b4b9'],
                     formType: 'default',

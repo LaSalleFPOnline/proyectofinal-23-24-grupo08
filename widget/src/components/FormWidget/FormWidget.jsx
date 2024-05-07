@@ -81,7 +81,6 @@ const FormWidget = (props) => {
     });
 
     useEffect(() => {
-        console.log("------>RES", responseForm);
         if ((responseForm || hasSendingError) && stepActive < numSteps) setStepActive(stepActive + 1);
     }, [responseForm, hasSendingError]);
 

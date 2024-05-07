@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const getSlug = (cadena) => {
     let replaced;
     const translationDictionary = {
@@ -233,4 +235,11 @@ const getSlug = (cadena) => {
         .toLowerCase();
 };
 
-module.exports = { getSlug };
+const generateUniqueId = () => {
+    const timestamp = Date.now().toString();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const id = bcrypt.hashSync(timestamp + randomString, 15).replace(/[&?\/]/g, '');
+    return id;
+};
+
+module.exports = { getSlug, generateUniqueId };

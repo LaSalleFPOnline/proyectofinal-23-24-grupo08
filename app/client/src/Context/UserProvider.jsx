@@ -20,8 +20,6 @@ const defaultUserData = {
 
 const getInitUser = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    // const user = JSON.parse(btoa(localStorage.getItem('user')));
-    console.log('GET INIT USER >> ', { user, user });
     return user || defaultUserData;
 };
 
@@ -30,7 +28,8 @@ const UserProvider = (props) => {
     const [userData, setUserData] = useState({ ...getInitUser() });
     const [errorLogin, setErrorLogin] = useState(false);
     const [errorRegister, setErrorRegister] = useState(false);
-    const { data: dataLogin, isLoading, hasError, postData: postLogin } = useData();
+    const [isLoading, setIsLoading] = useState(false);
+    const { data: dataLogin, isLoading: isLoadingLogin, hasError, postData: postLogin } = useData();
     const { data: dataRegister, isLoading: isLoadingRegister, hasError: hasErrorRegister, postData: postRegister } = useData();
 
     const navigate = useNavigate();
@@ -57,6 +56,10 @@ const UserProvider = (props) => {
             ...data.data
         });
     };
+
+    useEffect(() => {
+        setIsLoading(isLoadingLogin || isLoadingRegister);
+    }, [isLoadingLogin, isLoadingRegister]);
 
     useEffect(() => {
         if (dataLogin) {
@@ -89,7 +92,7 @@ const UserProvider = (props) => {
             console.log('data register >>> ', dataRegister);
             if (dataRegister?.status === 'OK') {
                 setUserDataAuthenticated(dataRegister);
-                const { isRestaurant, slug } = dataLogin.data;
+                const { isRestaurant, slug } = dataRegister.data;
 
                 if (isRestaurant) {
                     navigate(`/${slug}/configuracion`, {
@@ -101,6 +104,7 @@ const UserProvider = (props) => {
                     });
                 }
             } else {
+                setErrorRegister(dataRegister.error);
                 console.log('ERROR REGISTER');
             }
         }
@@ -117,7 +121,9 @@ const UserProvider = (props) => {
         <UserContext.Provider
             value={{
                 ...userData,
+                isLoading,
                 errorLogin,
+                errorRegister,
                 signUp,
                 signIn,
                 signOut

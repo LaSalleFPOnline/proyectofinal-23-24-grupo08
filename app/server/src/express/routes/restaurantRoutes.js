@@ -3,6 +3,7 @@ const router = express.Router();
 const { restaurantController } = require('../controllers');
 
 router.get('/', restaurantController.getAll);
+router.get('/widgetValidation', restaurantController.getByWidgetCode);
 router.get('/:id', restaurantController.getById);
 router.get('/:id/bookings', restaurantController.getRestaurantBookings);
 router.post('/', restaurantController.create);

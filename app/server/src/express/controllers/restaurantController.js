@@ -1,3 +1,4 @@
+const { generateUniqueId } = require('../../helpers/stringHelpers');
 const sequelize = require('../../sequelize');
 const { restaurant: Restaurant } = sequelize.models;
 let controllers = null;
@@ -73,14 +74,34 @@ const restaurantController = {
             res.status(500).json({ status: 'KO', message: 'Error al obtener las bookings del restaurante' });
         }
     },
+    getByWidgetCode: async (req, res) => {
+        const { widgetCode } = req.query;
+        try {
+            const restaurant = await Restaurant.findOne({
+                where: {
+                    widgetCode
+                }
+            });
+
+            // TODO: Mirar si la petició ve del domini correcte
+
+            res.json({
+                status: 'OK',
+                data: restaurant
+            });
+        } catch (error) {
+            res.status(500).json({ status: 'KO', message: 'Error al obtener el restaurant restaurante' });
+        }
+    },
 
     create: async (req, res) => {
-        const { idRestaurant, date, time, guests, comments, name, email, phone } = req.body;
+        const { userId, name, slug } = req.body;
         try {
-            const newBooking = await Restaurant.create({ idRestaurant, date, time, guests, comments, name, email, phone });
+            const widgetCode = generateUniqueId();
+            const newRestaurant = await Restaurant.create({ userId, name, slug, widgetCode });
             res.status(201).json({
                 status: 'OK',
-                data: newBooking
+                data: newRestaurant
             });
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al crear un nuevo booking', error });
@@ -89,7 +110,9 @@ const restaurantController = {
     createFromRegister: async (params) => {
         const { userId, name, slug } = params;
         try {
-            const newRestaurant = await Restaurant.create({ userId, name, slug });
+            const widgetCode = generateUniqueId();
+            console.log('GENEREM TOKEN > ', widgetCode);
+            const newRestaurant = await Restaurant.create({ userId, name, slug, widgetCode });
             return newRestaurant;
         } catch (error) {
             console.log('ERROR CREATE FROM REGISTER RESTAURANTB >> ', error);
