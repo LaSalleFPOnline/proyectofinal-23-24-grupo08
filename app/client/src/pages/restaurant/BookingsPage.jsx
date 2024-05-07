@@ -8,19 +8,12 @@ import { useData } from '../../hooks/useData';
 import { useEffect } from 'react';
 
 const BookingsPage = (props) => {
-    const { idRestaurant } = props;
-    const { name } = useUser();
-
+    const { restaurantId } = useUser();
     const { data: dataBookings, isLoading, hasError, getData: getBookings } = useData();
 
     useEffect(() => {
-        getBookings('/booking');
+        getBookings(`/restaurant/${restaurantId}/bookings`);
     }, []);
-
-    console.log('*** BOOKINGS RESTAURANT PAGE useUser -> ', {
-        name,
-        idRestaurant
-    });
 
     return (
         <>
@@ -32,9 +25,9 @@ const BookingsPage = (props) => {
                     <div className='mainBookingsContainer'>
                         <div className='bookingsPreview'>
                             <div className='activeBookings'>
-                                <h2>Active Bookings</h2>
+                                <h2>Reservas activas</h2>
                                 <div className='bookingsSections'>
-                                    {dataBookings.map((booking, index) => (
+                                    {dataBookings.data.map((booking, index) => (
                                         <BookingCards
                                             key={`booking-card-${index}`}
                                             time={booking.time}
@@ -46,7 +39,7 @@ const BookingsPage = (props) => {
                                 </div>
                             </div>
                             <div className='upcomingBookings'>
-                                <h2>Upcoming Bookings</h2>
+                                <h2>Proximas reservas</h2>
                                 <div className='bookingsSections'>
                                     <BookingCards
                                         time='12:00'
@@ -82,7 +75,7 @@ const BookingsPage = (props) => {
                             </div>
                         </div>
                         <div className='bookings'>
-                            <BookingCalendar dataBookings={dataBookings} />
+                            <BookingCalendar dataBookings={dataBookings.data} />
                         </div>
                     </div>
                 </>
