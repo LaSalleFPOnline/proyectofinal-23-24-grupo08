@@ -54,6 +54,32 @@ npx nodemon src/server.js
 
 ## API Documentation
 
+### Restaurant
+
+### [GET] Get all
+
+`/restaurant`
+
+### [GET] Get by restaurant id
+
+`/restaurant/:id`
+
+### [GET] Get by widget code
+
+`/restaurant/widgetValidation?widgetCode=XXX`
+
+### [GET] Get restaurant bookings
+
+`/restaurant/:id/bookings`
+
+### [POST] Create
+
+`/restaurant`
+
+### Bookings
+
+### User
+
 ### getUser
 
 -   endpoint: `/user`

@@ -49,7 +49,6 @@ const authController = {
                                 if (err) {
                                     res.status(500).json({ status: 'KO', message: 'Error al firmar el token' });
                                 } else {
-                                    console.log('user >>> ', { id: user.id, rol: user.rol });
                                     if (user.rol === 2) {
                                         const restaurant = await restaurantController.getByUserId(user.id);
 
@@ -62,6 +61,7 @@ const authController = {
                                                 email: user.email,
                                                 firstName: user.firstName,
                                                 lastName: user.lasttName,
+                                                restaurantName: restaurant.name,
                                                 restaurantId: restaurant.id,
                                                 slug: restaurant.slug,
                                                 role: 2,
@@ -93,7 +93,6 @@ const authController = {
                 }
             });
         } catch (error) {
-            console.error('Error al iniciar sesión', error);
             res.status(500).json({
                 message: 'Error interno',
                 status: 'Error'

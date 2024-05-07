@@ -6,6 +6,9 @@ export const useUser = () => {
         accessToken,
         userId,
         restaurantId,
+        firstName,
+        lastName,
+        restaurantName,
         email,
         slug,
         validate,
@@ -14,7 +17,9 @@ export const useUser = () => {
         isRestaurant,
         isAdmin,
 
+        isLoading,
         errorLogin,
+        errorRegister,
         signUp,
         signIn,
         signOut
@@ -24,6 +29,9 @@ export const useUser = () => {
         accessToken,
         userId,
         restaurantId,
+        firstName,
+        lastName,
+        restaurantName,
         email,
         slug,
         validate,
@@ -32,7 +40,9 @@ export const useUser = () => {
         isRestaurant,
         isAdmin,
 
+        isLoading,
         errorLogin,
+        errorRegister,
         signUp,
         signIn,
         signOut

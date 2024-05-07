@@ -8,47 +8,14 @@ import {
     nameRestaurant_validation
 } from '../Input/helpers';
 import { useUser } from '../../hooks/useUser';
-import { useState } from 'react';
 import { Button } from '../button/Button';
 
-export const FormRegister = ({plan}) => {
+export const FormRegister = ({ plan }) => {
     const methods = useForm();
-    const { signUp } = useUser();
+    const { signUp, isLoading } = useUser();
 
     const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
-
-        if (Object.keys(data).length) {
-            console.log('DATA >>> ', data);
-            signUp(data);
-        }
-        //   const myHeaders = new Headers();
-        //   myHeaders.append("Content-Type", "application/json");
-
-        //   const raw = JSON.stringify({
-        //     username: data.username,
-        //     firstName: data.name,
-        //     email: data.email,
-        //     password: data.password,
-        //   });
-
-        //   const requestOptions = {
-        //     method: "POST",
-        //     headers: myHeaders,
-        //     body: raw,
-        //     redirect: "follow",
-        //   };
-
-        //   fetch("http://localhost:9000/api/user", requestOptions)
-        //     .then((response) => response.text())
-        //     .then((result) => console.log(result))
-        //     .catch((error) => console.error(error));
-        // }
-
-        // console.log("User has been registered successfully");
-        // console.log("Redirecting to login page");
-        // console.log(data);
-        // navigate("/login");
+        if (Object.keys(data).length) signUp(data);
     });
 
     return (
@@ -69,7 +36,7 @@ export const FormRegister = ({plan}) => {
                     <Input {...nameRestaurant_validation} />
                 </div>
                 <div className='mt-5'>
-                    <Button onClick={onSubmit} text='Registrate' />
+                    <Button onClick={onSubmit} text={isLoading ? 'Resgistrando...' : 'Registrate'} />
                 </div>
             </form>
         </FormProvider>

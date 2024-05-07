@@ -20,6 +20,14 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        widgetCode: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        widgetDomains: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true
+        },
         description: {
             type: DataTypes.STRING
         },
