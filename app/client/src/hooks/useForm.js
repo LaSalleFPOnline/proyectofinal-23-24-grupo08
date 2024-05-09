@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { useData } from './useData';
 import __isUndefined from 'lodash/isUndefined';
 
-export const useForm = (initialForm = {}, formValidations = {}, formEndpoint = '') => {
+export const useForm = (initialForm = {}, formValidations = {}, formEndpoint = '', protocol = 'POST') => {
     const [formState, setFormState] = useState(initialForm);
     const [formValidation, setFormValidation] = useState({});
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [errorForm, setErrorForm] = useState(false);
-    const { postData, data, isLoading, hasError } = useData();
+    const { postData, putData, data, isLoading, hasError } = useData();
 
     const onInputChange = ({ target }) => {
         const { name, value } = target;
@@ -55,7 +55,11 @@ export const useForm = (initialForm = {}, formValidations = {}, formEndpoint = '
         if (isFormValid) setErrorForm(true);
 
         if (isFormValid && formEndpoint) {
-            postData(formEndpoint, formState);
+            if (protocol === 'POST') {
+                postData(formEndpoint, formState);
+            } else if (protocol === 'PUT') {
+                putData(formEndpoint, formState);
+            }
         }
     };
 

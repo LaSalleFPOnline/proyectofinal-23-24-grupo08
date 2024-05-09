@@ -5,7 +5,11 @@ const _routeRestaurantPaths = {
     dashboard: '/:slugRestaurant',
     bookings: '/:slugRestaurant/reservas',
     editBooking: '/:slugRestaurant/:idBooking/editar',
-    configuration: '/:slugRestaurant/configuracion'
+    configuration: '/:slugRestaurant/configuracion',
+    configurationWidget: '/:slugRestaurant/configuracion/widget',
+    configurationRestaurant: '/:slugRestaurant/configuracion/restaurante',
+    configurationPersonal: '/:slugRestaurant/configuracion/personal',
+    configurationBilling: '/:slugRestaurant/configuracion/facturacion'
 };
 
 const _routeAdminPaths = {

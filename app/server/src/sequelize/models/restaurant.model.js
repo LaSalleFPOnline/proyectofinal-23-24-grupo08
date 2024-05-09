@@ -40,14 +40,23 @@ module.exports = (sequelize, Sequelize) => {
         logo: {
             type: DataTypes.BLOB
         },
-        openTime: {
+        intervalHourBooking: {
+            type: DataTypes.INTEGER
+        },
+        openTimeLaunch: {
             type: DataTypes.TIME
         },
-        closeTime: {
+        closeTimeLaunch: {
+            type: DataTypes.TIME
+        },
+        openTimeDinner: {
+            type: DataTypes.TIME
+        },
+        closeTimeDinner: {
             type: DataTypes.TIME
         },
         daysClosed: {
-            type: DataTypes.STRING
+            type: DataTypes.ARRAY(DataTypes.STRING)
         },
         capacity: {
             type: DataTypes.INTEGER

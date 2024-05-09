@@ -4,7 +4,34 @@ h1 {
 
 /* styles.css */
 :root {
-    --primary-color: #2A5865; /* Define el color primario */
-    --secondary-color: #90BDC2; /* Define el color secundario */
-    --primary-button-color: #BC8707;
+    --primary-color: #2a5865; /* Define el color primario */
+    --secondary-color: #90bdc2; /* Define el color secundario */
+    --primary-button-color: #bc8707;
+
+    --headline_xl: 3.653rem;
+    --headline_l: 4.5rem; // 72px
+    --headline_m: 4.375rem; // 70px
+    --headline_s: 3.5rem; // 56px
+    --headline_xs: 3rem; // 48px
+    --body_l: 2rem; // 32px
+    --body_m: 1.5rem; // 24px
+    --body_ms: 1.125rem; // 18px
+    --body_s: 1rem; // 16px
+    --body_xs: 0.9rem; // 14px
+    --body_xxs: 0.75rem; // 12px
+    --body_xxxs: 0.688rem;
+
+    // COLORS
+    --clr_100: #fff;
+    --clr_90: #b4d6eb;
+    --clr_70: #829be5;
+    --clr_50: #4b5989;
+    --clr_30: #191e35;
+    --clr_20: #6a605f;
+    --clr_10: #120907;
+    --clr_0: #000;
+
+    --clr_50_transparent: rgba(197, 186, 125, 0.5);
+
+    --error: #d10e0e;
 }

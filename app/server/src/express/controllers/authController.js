@@ -67,7 +67,20 @@ const authController = {
                                                 role: 2,
                                                 validate: restaurant.validate,
                                                 isRestaurant: true,
-                                                isAdmin: false
+                                                isAdmin: false,
+                                                config: {
+                                                    daysClose: restaurant.daysClosed,
+                                                    capacity: restaurant.capacity,
+                                                    intervalHourBooking: restaurant.intervalHourBooking,
+                                                    launch: {
+                                                        start: restaurant.openTimeLaunch,
+                                                        end: restaurant.closeTimeLaunch
+                                                    },
+                                                    dinner: {
+                                                        start: restaurant.openTimeDinner,
+                                                        end: restaurant.closeTimeDinner
+                                                    }
+                                                }
                                             }
                                         });
                                     } else {

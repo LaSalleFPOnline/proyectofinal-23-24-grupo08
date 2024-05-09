@@ -1,0 +1,14 @@
+.icon {
+    // pointer-events: none;
+    vertical-align: middle;
+
+    path {
+        fill: var(--clr_90);
+    }
+
+    &:hover {
+        path {
+            fill: var(--clr_10);
+        }
+    }
+}

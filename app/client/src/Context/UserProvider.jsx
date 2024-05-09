@@ -95,7 +95,7 @@ const UserProvider = (props) => {
                 const { isRestaurant, slug } = dataRegister.data;
 
                 if (isRestaurant) {
-                    navigate(`/${slug}/configuracion`, {
+                    navigate(`/${slug}/configuracion/restaurante`, {
                         replace: true
                     });
                 } else {
