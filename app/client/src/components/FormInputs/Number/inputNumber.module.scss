@@ -1,0 +1,22 @@
+.contNumber {
+    position: relative;
+    display: flex;
+    vertical-align: middle;
+    flex-direction: row;
+    align-items: center;
+
+    .buttonNumber {
+        &.disabled {
+            opacity: 0.5;
+        }
+    }
+
+    .valueNumber {
+        font-size: var(--body_m);
+        font-weight: bold;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 45px;
+        text-align: center;
+    }
+}
