@@ -8,10 +8,11 @@ footer {
     align-items: center;
     gap: 18%;
     color: #ffff;
+    padding: 5%;
 }
 
 .sectionTitles{
-    font-size: 1.3rem;
+    font-size: calc(1vw + 1rem);
     border-bottom: 2px solid #FAD628;
     cursor: pointer;
     width: fit-content;
@@ -27,4 +28,23 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-size: calc(1vw + 0.5rem);
 }
+
+@media only screen and (max-width: 767px) {
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+  
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+  
+@media only screen and (min-width: 1200px) {
+  
+}
+  
+  

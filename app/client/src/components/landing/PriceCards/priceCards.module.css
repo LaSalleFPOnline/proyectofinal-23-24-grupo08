@@ -1,44 +1,196 @@
-.priceCards{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #D9D9D9;
-    max-width: 420px;
-    padding: 64px 32px;
-    color: var(--primary-color);
-    border-radius: 12px;
+
+
+@media only screen and (max-width: 767px) {
+    
+    .priceCards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #D9D9D9;
+        max-width: 420px;
+        padding: 64px 5%;
+        color: var(--primary-color);
+        border-radius: 12px;
+    }
+
+    .priceCards h3{
+        font-size: calc(1vw + 1.3rem);
+        font-weight: lighter;
+    }
+
+    .description{
+        text-align: center;
+        font-size: 1rem;
+        width: 95%;
+        line-height: 2ch;
+        margin-top: 16px;
+    }
+
+    .price{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-top: 45px;
+    }
+
+    .buyButton{
+        font-size: calc(1vw + 1rem);
+        font-weight: 600;
+        padding: 6px 64px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: filter 0.3s ease; 
+        margin-top: 54px;
+    }
+
+    .buyButton:hover{
+        scale: 1.05;
+        filter: brightness(110%);
+    }
+}
+  
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+   
+    .priceCards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #D9D9D9;
+        max-width: 420px;
+        padding: 64px 32px;
+        color: var(--primary-color);
+        border-radius: 12px;
+    }
+
+    .priceCards h3{
+        font-size: 2rem;
+        font-weight: lighter;
+    }
+
+    .description{
+        text-align: center;
+        font-size: 1rem;
+        width: 95%;
+        line-height: 2ch;
+        margin-top: 16px;
+    }
+
+    .price{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-top: 45px;
+    }
+
+    .buyButton{
+        font-size: 1.62rem;
+        font-weight: 600;
+        padding: 6px 64px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: filter 0.3s ease; 
+        margin-top: 54px;
+    }
+
+    .buyButton:hover{
+        scale: 1.05;
+        filter: brightness(110%);
+    }
 }
 
-.priceCards h3{
-    font-size: 32px;
-    font-weight: lighter;
-}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    
+    .priceCards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #D9D9D9;
+        max-width: 420px;
+        padding: 64px 32px;
+        color: var(--primary-color);
+        border-radius: 12px;
+    }
 
-.description{
-    text-align: center;
-    font-size: 16px;
-    width: 95%;
-    line-height: 2ch;
-    margin-top: 16px;
-}
+    .priceCards h3{
+        font-size: 2rem;
+        font-weight: lighter;
+    }
 
-.price{
-    font-size: 48px;
-    font-weight: 600;
-    margin-top: 45px;
-}
+    .description{
+        text-align: center;
+        font-size: 1rem;
+        width: 95%;
+        line-height: 2ch;
+        margin-top: 16px;
+    }
 
-.buyButton{
-    font-size: 26px;
-    font-weight: 600;
-    padding: 6px 64px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: filter 0.3s ease; 
-    margin-top: 54px;
-}
+    .price{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-top: 45px;
+    }
 
-.buyButton:hover{
-    scale: 1.05;
-    filter: brightness(110%); /* Aumenta el brillo al 120% */
+    .buyButton{
+        font-size: 1.62rem;
+        font-weight: 600;
+        padding: 6px 64px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: filter 0.3s ease; 
+        margin-top: 54px;
+    }
+
+    .buyButton:hover{
+        scale: 1.05;
+        filter: brightness(110%);
+    }
 }
+  
+@media only screen and (min-width: 1200px) {
+    
+    .priceCards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #D9D9D9;
+        max-width: 420px;
+        padding: 64px 2%;
+        color: var(--primary-color);
+        border-radius: 12px;
+        justify-content: space-between;
+    }
+
+    .priceCards h3{
+        margin-top: 30px;
+        font-size: 1.5vw;
+        font-weight: lighter;
+    }
+
+    .description{
+        text-align: center;
+        font-size: 1vw;
+        width: 95%;
+        line-height: 2ch;
+        margin-top: 16px;
+    }
+
+    .price{
+        font-size: 3rem;
+        font-weight: 600;
+        margin-top: 45px;
+    }
+
+    .buyButton{
+        font-size:1.5vw;
+        font-weight: 600;
+        padding: 6px 20%;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: filter 0.3s ease; 
+        margin-top: 54px;
+    }
+
+    .buyButton:hover{
+        scale: 1.05;
+        filter: brightness(110%);
+    }
+}
+  

@@ -33,26 +33,10 @@ const LandingPage = (props) => {
 
 	return (
 		<>
-			{/* Title section */}
-			{/* <div className="mx-auto mt-48 max-w-7xl px-6 lg:px-8">
-				<div className="mx-auto max-w-2xl text-center">
-					<p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl ">
-						Bookings easy way
-					</p>
-					<div className="mx-auto mt-12 max-w-7xl px-6 lg:px-8">
-						<Button text="Get Started" onClick={handleOpenModalRegister} />
-						<ModalRegister
-							isOpen={isModalRegisterOpen}
-							onClose={handleCloseModalRegister}
-							onSubmit={handleFormSubmit}
-						/>
-					</div>
-				</div>
-			</div> */}
 
 			<section className={styles.landingMainSection}>
-				<h1> OPTIMIZA TUS RESERVAS, <br></br> SUMPLIFICA TU RESTAURANTE</h1>
-				<p>Descubre cómo dgusta simplifica tu día a día en la gestión de reservas, permitiéndote <br></br>
+				<h1> OPTIMIZA TUS RESERVAS, <br></br> SIMPLIFICA TU RESTAURANTE</h1>
+				<p>Descubre cómo dgusta simplifica tu día a día en la gestión de reservas, permitiéndote
 					enfocarte en lo que más importa: tu restaurante y tus clientes.</p>
 				<button className={styles.landingMainSectionButton} onClick={handleOpenModalRegister}>GET STARTED</button>
 				<ModalRegister
@@ -62,14 +46,16 @@ const LandingPage = (props) => {
 					plan={plan}
 				/>
 			</section>
-			<div className={styles.firstSeparator}></div>
+			
 			<section className={styles.priceSection}>
+				<div className={styles.firstSeparator}></div>
 				<h2>ENCUENTRA TU PRECIO IDEAL</h2>
 				<div className={styles.cards}>
 					<PriceCards onClick={handleOpenModalRegister}></PriceCards>
 				</div>
+				<div className={styles.secondSeparator}></div>
 			</section>
-			<div className={styles.secondSeparator}></div>
+			
 			<div className={styles.aboutAppSection}>
 				<AboutApp></AboutApp>
 			</div>

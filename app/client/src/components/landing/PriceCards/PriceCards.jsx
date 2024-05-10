@@ -7,7 +7,7 @@ const PriceCards = ({onClick}) => {
         
         priceCardsInfo.map( (element, index) => {
             return(
-                <div className={styles.priceCards} style={{ borderTop: `20px solid ${element.colorCode}` }}>
+                <div id={index} className={styles.priceCards} style={{ borderTop: `20px solid ${element.colorCode}` }}>
                     <img src={element.src} alt="" />
                     <h3>{element.title}</h3>
                     <p className={styles.description}>{element.description}</p>

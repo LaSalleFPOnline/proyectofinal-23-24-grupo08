@@ -1,6 +1,6 @@
 .navBar{
     background-color: var(--primary-color);
-    width: 100vw;
+    width: 100%;
     height: 10vh;
     display: flex;
     flex-direction: row;
@@ -8,6 +8,7 @@
     align-items: center;
     padding: 0px 10%;
     color: #FFFF;
+    position: relative;
 }
 
 .navBar span {
@@ -33,4 +34,83 @@
     padding: 8px 10px;
     border-radius: 4px;
     font-weight: 600;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    .navButtons {
+        display: none;
+    }
+
+    .dropDownMenu {
+        position: absolute;
+        background-color: var(--primary-color);
+        height: 90vh;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        transform: translate(0%, 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 40px 10%;
+        gap: 50px;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, 0.1s ;
+    }
+
+    .dropDownMenu.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .navButtons {
+        display: none;
+    }
+
+    .dropDownMenu {
+        position: absolute;
+        background-color: var(--primary-color);
+        height: 90vh;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        transform: translate(0%, 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 40px 10%;
+        gap: 50px;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, 0.1s ;
+    }
+
+    .dropDownMenu.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .dropDownMenuButton {
+        display: none;
+    }
+
+    .dropDownMenu {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .dropDownMenuButton {
+        display: none;
+    }
+
+    .dropDownMenu {
+        display: none;
+    }
 }
