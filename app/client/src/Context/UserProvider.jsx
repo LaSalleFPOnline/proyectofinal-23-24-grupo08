@@ -49,6 +49,26 @@ const UserProvider = (props) => {
         localStorage.removeItem('user');
     };
 
+    const updateConfig = (data) => {
+        console.log('update config >>> ', data);
+        setUserData({
+            ...userData,
+            config: {
+                daysClosed: data?.daysClosed,
+                capacity: data?.capacity,
+                intervalHourBooking: data?.intervalHourBooking,
+                launch: {
+                    start: data?.openTimeLaunch,
+                    end: data?.closeTimeLaunch
+                },
+                dinner: {
+                    start: data?.openTimeDinner,
+                    end: data?.closeTimeDinner
+                }
+            }
+        });
+    };
+
     const setUserDataAuthenticated = (data) => {
         setUserData({
             accessToken: data.token,
@@ -126,7 +146,8 @@ const UserProvider = (props) => {
                 errorRegister,
                 signUp,
                 signIn,
-                signOut
+                signOut,
+                updateConfig
             }}
         >
             {children}

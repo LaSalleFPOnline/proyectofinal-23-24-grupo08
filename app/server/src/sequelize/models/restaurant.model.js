@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         widgetDomains: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.STRING,
             allowNull: true
         },
         description: {
@@ -56,7 +56,7 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.TIME
         },
         daysClosed: {
-            type: DataTypes.ARRAY(DataTypes.STRING)
+            type: DataTypes.INTEGER
         },
         capacity: {
             type: DataTypes.INTEGER

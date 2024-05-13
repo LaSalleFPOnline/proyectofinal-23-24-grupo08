@@ -1,7 +1,7 @@
 const sequelize = require('../../sequelize');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { getSlug } = require('../../helpers/stringHelpers');
+const { getSlug, getTimeToString } = require('../../helpers/stringHelpers');
 
 let controllers = null;
 
@@ -69,16 +69,16 @@ const authController = {
                                                 isRestaurant: true,
                                                 isAdmin: false,
                                                 config: {
-                                                    daysClose: restaurant.daysClosed,
+                                                    daysClosed: restaurant.daysClosed,
                                                     capacity: restaurant.capacity,
                                                     intervalHourBooking: restaurant.intervalHourBooking,
                                                     launch: {
-                                                        start: restaurant.openTimeLaunch,
-                                                        end: restaurant.closeTimeLaunch
+                                                        start: getTimeToString(restaurant.openTimeLaunch),
+                                                        end: getTimeToString(restaurant.closeTimeLaunch)
                                                     },
                                                     dinner: {
-                                                        start: restaurant.openTimeDinner,
-                                                        end: restaurant.closeTimeDinner
+                                                        start: getTimeToString(restaurant.openTimeDinner),
+                                                        end: getTimeToString(restaurant.closeTimeDinner)
                                                     }
                                                 }
                                             }

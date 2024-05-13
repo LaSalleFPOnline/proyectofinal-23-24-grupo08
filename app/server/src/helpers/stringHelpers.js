@@ -235,6 +235,11 @@ const getSlug = (cadena) => {
         .toLowerCase();
 };
 
+const getTimeToString = (time) => {
+    if (!time) return null;
+    return time.split(':').slice(0, 2).join(':');
+};
+
 const generateUniqueId = () => {
     const timestamp = Date.now().toString();
     const randomString = Math.random().toString(36).substring(2, 8);
@@ -242,4 +247,4 @@ const generateUniqueId = () => {
     return id;
 };
 
-module.exports = { getSlug, generateUniqueId };
+module.exports = { getSlug, generateUniqueId, getTimeToString };
