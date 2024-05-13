@@ -18,8 +18,8 @@ const RestaurantNavBar = () => {
             <div className='secondContainer'>
                 <div className='buttonsContainer'>
                     {sideNavItems.map((item, index) => (
-                        <Link to={`/${slug}${item.href}`}>
-                            <button key={`restaurant-navbar-${index}`}>
+                        <Link to={`/${slug}${item.href}`} key={`restaurant-navbar-${index}`}>
+                            <button>
                                 <div dangerouslySetInnerHTML={{ __html: item.icon }} />
                                 <span>{item.text}</span>
                             </button>

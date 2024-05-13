@@ -122,18 +122,46 @@ const restaurantController = {
 
     update: async (req, res) => {
         const { id } = req.params;
-        const { idRestaurant, date, time, guests, comments, name, email, phone, status } = req.body;
+        const {
+            widgetDomains,
+            description,
+            phone,
+            address,
+            intervalHourBooking,
+            openTimeLaunch,
+            closeTimeLaunch,
+            openTimeDinner,
+            closeTimeDinner,
+            daysClosed,
+            capacity,
+            url
+        } = req.body;
+        console.log('req body > ', { body: req.body, id });
         try {
-            const [updated] = await restaurant.update(
-                { idRestaurant, date, time, guests, comments, name, email, phone, status },
+            const updatedRestaurant = await Restaurant.update(
+                {
+                    widgetDomains,
+                    description,
+                    phone,
+                    address,
+                    intervalHourBooking,
+                    openTimeLaunch,
+                    closeTimeLaunch,
+                    openTimeDinner,
+                    closeTimeDinner,
+                    daysClosed,
+                    capacity,
+                    url
+                },
                 { where: { id } }
             );
-            if (!updated) {
+            if (!updatedRestaurant) {
                 return res.status(404).json({ status: 'KO', message: 'Restaurant no encontrado' });
             }
-            res.json({ status: 'OK', message: 'Restaurant actualizado correctamente' });
+            res.json({ status: 'OK', data: updatedRestaurant, message: 'Restaurante actualizado correctamente' });
         } catch (error) {
-            res.status(500).json({ status: 'KO', message: 'Error al actualizar el boRestaurantoking' });
+            console.log('error >> ', error);
+            res.status(500).json({ status: 'KO', message: 'Error al actualizar el restaurante' });
         }
     },
 

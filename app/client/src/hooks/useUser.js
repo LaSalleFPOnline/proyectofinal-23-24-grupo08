@@ -16,13 +16,15 @@ export const useUser = () => {
         isAuthenticated,
         isRestaurant,
         isAdmin,
+        config,
 
         isLoading,
         errorLogin,
         errorRegister,
         signUp,
         signIn,
-        signOut
+        signOut,
+        updateConfig
     } = useContext(UserContext);
 
     return {
@@ -39,12 +41,14 @@ export const useUser = () => {
         isAuthenticated,
         isRestaurant,
         isAdmin,
+        config,
 
         isLoading,
         errorLogin,
         errorRegister,
         signUp,
         signIn,
-        signOut
+        signOut,
+        updateConfig
     };
 };
