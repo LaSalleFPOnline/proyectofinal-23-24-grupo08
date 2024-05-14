@@ -1,16 +1,16 @@
-export const title = "DGUSTA";
+export const title = 'DGUSTA';
 
 export const navigation = [
-	{
-		name: "DgustaApp",
-		href: "#features",
-	},
-	{
-		name: "Pricing",
-		href: "#",
-	},
-	{
-		name: "About Us",
-		href: "#",
-	}
+    {
+        name: 'Descubre',
+        href: '#features'
+    },
+    {
+        name: 'Precio',
+        href: '#'
+    },
+    {
+        name: 'Contrata',
+        href: '#'
+    }
 ];

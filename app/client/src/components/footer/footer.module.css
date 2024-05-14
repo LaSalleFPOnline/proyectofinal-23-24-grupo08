@@ -1,6 +1,5 @@
 footer {
-    width: 100vw;
-    height: 60vh;
+    width: 100%;
     background-color: var(--primary-color);
     display: flex;
     flex-direction: row;
@@ -8,22 +7,24 @@ footer {
     align-items: center;
     gap: 18%;
     color: #ffff;
+    padding-top: 50px;
+    padding-bottom: 70px;
 }
 
-.sectionTitles{
+.sectionTitles {
     font-size: 1.3rem;
-    border-bottom: 2px solid #FAD628;
+    border-bottom: 2px solid #fad628;
     cursor: pointer;
     width: fit-content;
 }
 
-.footerSections{
+.footerSections {
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
-.footerSections ul{
+.footerSections ul {
     display: flex;
     flex-direction: column;
     gap: 20px;

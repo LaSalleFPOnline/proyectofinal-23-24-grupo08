@@ -47,6 +47,9 @@ const UserProvider = (props) => {
     const signOut = () => {
         setUserData({ ...defaultUserData });
         localStorage.removeItem('user');
+        navigate(`/`, {
+            replace: true
+        });
     };
 
     const updateConfig = (data) => {

@@ -19,7 +19,6 @@ const ConfigurationPersonalPage = (props) => {
     return (
         <>
             <RestaurantNavBar />
-            <p>Personal</p>
             <div className='configurationContainer'>
                 <ConfigurationNavBar onButtonClick={handleButtonClick} />
                 <div className='configurationBody'>
