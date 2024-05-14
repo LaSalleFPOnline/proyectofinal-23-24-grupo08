@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useUser } from '../../../../hooks/useUser';
 import { useForm } from '../../../../hooks/useForm';
 import { formValidations } from './formValidations';
-import {
-    optionsCloseDinner,
-    optionsCloseLaunch,
-    optionsDayClosed,
-    optionsInterval,
-    optionsOpenDinner,
-    optionsOpenLaunch
-} from './optionsSelect';
 import FormInput from '../../../FormInputs/FormInput';
 import styles from '../configurationForm.module.scss';
 
@@ -31,17 +23,44 @@ const SuccessForm = (props) => {
         <div className={styles.formError}>Ha habido un error al guardar los cambios</div>
     );
 };
-const ConfigurationRestaurantForm = () => {
-    const { restaurantId, config } = useUser();
+
+const MarkdownCodeBox = (props) => {
+    const { code } = props;
+
+    const codeBoxRef = useRef(null);
+
+    const handleCopyToClipboard = (ev) => {
+        ev.preventDefault();
+        const codeBox = codeBoxRef.current;
+        if (codeBox) {
+            const range = document.createRange();
+            range.selectNode(codeBox);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('¡El código ha sido copiado al portapapeles!');
+        }
+    };
+
+    return (
+        <div className={styles.codeBox} ref={codeBoxRef}>
+            <pre>
+                <code>{code}</code>
+            </pre>
+
+            <button className={styles.copyButton} onClick={handleCopyToClipboard}>
+                Copiar
+            </button>
+        </div>
+    );
+};
+
+const ConfigurationWidget = () => {
+    const { restaurantId, widgetCode, config } = useUser();
 
     const formData = {
-        daysClosed: config?.daysClosed,
-        capacity: config?.capacity,
-        intervalHourBooking: config?.intervalHourBooking,
-        openTimeLaunch: config?.launch.start,
-        closeTimeLaunch: config?.launch.end,
-        openTimeDinner: config?.dinner.start,
-        closeTimeDinner: config?.dinner.end
+        widgetDomains: config?.widgetDomains
     };
     const {
         formState,
@@ -51,120 +70,47 @@ const ConfigurationRestaurantForm = () => {
         checkedValidateFields,
         onResetForm,
 
-        daysClosed,
-        capacity,
-        intervalHourBooking,
-        openTimeLaunch,
-        closeTimeLaunch,
-        openTimeDinner,
-        closeTimeDinner,
+        widgetDomains,
 
         isFormValid,
-        daysClosedValid,
-        capacityValid,
-        intervalHourBookingValid,
-        openTimeLaunchValid,
-        closeTimeLaunchValid,
-        openTimeDinnerValid,
-        closeTimeDinnerValid,
+        widgetDomainsValid,
 
         responseForm,
         isLoadingForm,
         hasSendingError
     } = useForm(formData, formValidations, `/restaurant/${restaurantId}`, 'PUT');
 
+    const code = `
+    <div id="dgusta-widget-booking" data-restaurant="${widgetCode}"></div>
+    
+    <script type="module" src="/src/index.jsx"></script>
+    <link rel="stylesheet" href="./src/styles/index.css" />
+  `;
+
     return (
         <div className={styles.personalDataMainContainer}>
             {(responseForm || hasSendingError) && <SuccessForm respForm={responseForm} formState={formState} />}
-            <h2>CONFIGURACIÓN RESTAURANTE</h2>
+            <h2>CONFIGURACIÓN DEL WIDGET</h2>
             <form className={styles.personalDataContainer} onSubmit={onSubmit}>
-                <div className={styles.personalDataRow}>
-                    <div className={styles.personalDataItem}>
-                        <FormInput
-                            type='select'
-                            placeholder='Día libre'
-                            name='daysClosed'
-                            value={daysClosed}
-                            onChange={onInputChange}
-                            error={!!daysClosedValid && formSubmitted}
-                            helperText={daysClosedValid}
-                            options={optionsDayClosed}
-                        />
-                    </div>
-                    <div className={styles.personalDataItem}>
+                <div className={styles.widgetRow}>
+                    <div className={styles.rowWidgetForm}>
                         <FormInput
                             type='text'
-                            placeholder='Capacidad restaurante'
-                            name='capacity'
-                            value={capacity}
+                            placeholder='Dominio del widget'
+                            name='widgetDomains'
+                            value={widgetDomains}
                             onChange={onInputChange}
-                            error={!!capacityValid && formSubmitted}
-                            helperText={capacityValid}
+                            error={!!widgetDomainsValid && formSubmitted}
+                            helperText={widgetDomainsValid}
                         />
                     </div>
-                </div>
-                <div className={styles.personalDataRow}>
-                    <FormInput
-                        type='select'
-                        placeholder='Intervalo de reservas'
-                        name='intervalHourBooking'
-                        value={intervalHourBooking}
-                        onChange={onInputChange}
-                        error={!!intervalHourBookingValid && formSubmitted}
-                        helperText={intervalHourBookingValid}
-                        options={optionsInterval}
-                    />
-                </div>
-                <div className={styles.personalDataRow}>
-                    <div className={styles.personalDataItem}>
-                        <FormInput
-                            type='select'
-                            placeholder='Hora apertura comida'
-                            name='openTimeLaunch'
-                            value={openTimeLaunch}
-                            onChange={onInputChange}
-                            error={!!openTimeLaunchValid && formSubmitted}
-                            helperText={openTimeLaunchValid}
-                            options={optionsOpenLaunch}
-                        />
-                    </div>
-                    <div className={styles.personalDataItem}>
-                        <FormInput
-                            type='select'
-                            placeholder='Hora apertura comida'
-                            name='closeTimeLaunch'
-                            value={closeTimeLaunch}
-                            onChange={onInputChange}
-                            error={!!closeTimeLaunchValid && formSubmitted}
-                            helperText={closeTimeLaunchValid}
-                            options={optionsCloseLaunch}
-                        />
-                    </div>
-                </div>
-                <div className={styles.personalDataRow}>
-                    <div className={styles.personalDataItem}>
-                        <FormInput
-                            type='select'
-                            placeholder='Hora apertura cena'
-                            name='openTimeDinner'
-                            value={openTimeDinner}
-                            onChange={onInputChange}
-                            error={!!openTimeDinnerValid && formSubmitted}
-                            helperText={openTimeDinnerValid}
-                            options={optionsOpenDinner}
-                        />
-                    </div>
-                    <div className={styles.personalDataItem}>
-                        <FormInput
-                            type='select'
-                            placeholder='Hora apertura cena'
-                            name='closeTimeDinner'
-                            value={closeTimeDinner}
-                            onChange={onInputChange}
-                            error={!!closeTimeDinnerValid && formSubmitted}
-                            helperText={closeTimeDinnerValid}
-                            options={optionsCloseDinner}
-                        />
+                    <div className={styles.rowWidgetCode}>
+                        <h3>Copia este codigo en tu pàgina web</h3>
+                        <p>
+                            Insertar este código en el <strong>body</strong> donde quieres que se muestre el widget, recuerda
+                            ponerlo en el dominio que has incluido.
+                        </p>
+                        <MarkdownCodeBox code={code} />
                     </div>
                 </div>
 
@@ -178,4 +124,4 @@ const ConfigurationRestaurantForm = () => {
     );
 };
 
-export default ConfigurationRestaurantForm;
+export default ConfigurationWidget;

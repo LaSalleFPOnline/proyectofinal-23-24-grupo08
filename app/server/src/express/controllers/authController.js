@@ -65,10 +65,12 @@ const authController = {
                                                 restaurantId: restaurant.id,
                                                 slug: restaurant.slug,
                                                 role: 2,
+                                                widgetCode: restaurant.widgetCode,
                                                 validate: restaurant.validate,
                                                 isRestaurant: true,
                                                 isAdmin: false,
                                                 config: {
+                                                    widgetDomains: restaurant.widgetDomains,
                                                     daysClosed: restaurant.daysClosed,
                                                     capacity: restaurant.capacity,
                                                     intervalHourBooking: restaurant.intervalHourBooking,
