@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const sequelize = require('../../sequelize');
 const { booking: Booking } = sequelize.models;
 let controllers = null;
@@ -19,18 +20,23 @@ const bookingController = {
             return [];
         }
     },
-    getRestaurantBookingsByHour: async (idRestaurant, date, time) => {
+    getRestaurantBookingsByHour: async (idRestaurant, date) => {
         try {
-            date = new Date(date);
+            const startDate = new Date(date);
+            startDate.setUTCHours(0, 0, 0, 0);
+
+            const endDate = new Date(date);
+            endDate.setUTCHours(23, 59, 59, 999);
 
             const bookings = await Booking.findAll({
                 where: {
                     idRestaurant,
-                    date,
-                    time
+                    date: {
+                        [Op.between]: [startDate, endDate]
+                    }
                 }
             });
-            console.log('getRestaurantBookingsByHour >> ', { bookings, date, time });
+            console.log('getRestaurantBookingsByHour >> ', { bookings, date});
             if (!bookings) return [];
 
             return bookings;
