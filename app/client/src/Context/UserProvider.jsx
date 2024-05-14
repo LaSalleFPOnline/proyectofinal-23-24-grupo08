@@ -54,16 +54,17 @@ const UserProvider = (props) => {
         setUserData({
             ...userData,
             config: {
-                daysClosed: data?.daysClosed,
-                capacity: data?.capacity,
-                intervalHourBooking: data?.intervalHourBooking,
+                widgetDomains: data?.widgetDomains || userData.config.widgetDomains,
+                daysClosed: data?.daysClosed || userData.config.daysClosed,
+                capacity: data?.capacity || userData.config.capacity,
+                intervalHourBooking: data?.intervalHourBooking || userData.config.intervalHourBooking,
                 launch: {
-                    start: data?.openTimeLaunch,
-                    end: data?.closeTimeLaunch
+                    start: data?.openTimeLaunch || userData.config.launch.openTimeLaunch,
+                    end: data?.closeTimeLaunch || userData.config.launch.closeTimeLaunch
                 },
                 dinner: {
-                    start: data?.openTimeDinner,
-                    end: data?.closeTimeDinner
+                    start: data?.openTimeDinner || userData.config.dinner.openTimeDinner,
+                    end: data?.closeTimeDinner || userData.config.dinner.closeTimeDinner
                 }
             }
         });

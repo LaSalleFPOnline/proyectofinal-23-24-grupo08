@@ -16,6 +16,7 @@ export const useUser = () => {
         isAuthenticated,
         isRestaurant,
         isAdmin,
+        widgetCode,
         config,
 
         isLoading,
@@ -41,6 +42,7 @@ export const useUser = () => {
         isAuthenticated,
         isRestaurant,
         isAdmin,
+        widgetCode,
         config,
 
         isLoading,

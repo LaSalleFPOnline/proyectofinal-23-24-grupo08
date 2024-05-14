@@ -87,3 +87,72 @@
     font-weight: bold;
     color: #fff;
 }
+
+.widgetRow {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+.rowWidgetForm {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.rowWidgetCode {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    gap: 16px;
+
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .widgetCodeBox {
+        border: 1px solid #204049;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .codeBox {
+        background-color: var(--clr_90);
+        padding: 40px 10px 10px 0px;
+        border-radius: 5px;
+        overflow-x: hidden;
+        border: 1px solid var(--clr_10);
+        position: relative;
+    }
+
+    .codeBox pre {
+        margin: 0;
+    }
+
+    .codeBox code {
+        display: block;
+        white-space: pre;
+        font-size: 14px;
+    }
+
+    .codeBox code.js {
+        color: #0000ff;
+    }
+
+    .copyButton {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: var(--clr_50);
+        color: var(--clr_100);
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+
+    .copyButton:hover {
+        background-color: var(--clr_30);
+    }
+}
