@@ -22,7 +22,7 @@ const Icon = (props) => {
                 svg.setAttribute('width', '100%');
                 svg.setAttribute('height', '100%');
             }}
-            src={`/_resources/icons/${icon}.svg`}
+            src={`${import.meta.env.VITE_URL_RESOURCES}/icons/${icon}.svg`}
             wrapper='svg'
             aria-label={alt}
         />

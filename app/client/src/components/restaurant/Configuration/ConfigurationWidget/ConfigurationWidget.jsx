@@ -83,8 +83,8 @@ const ConfigurationWidget = () => {
     const code = `
     <div id="dgusta-widget-booking" data-restaurant="${widgetCode}"></div>
     
-    <script type="module" src="/src/index.jsx"></script>
-    <link rel="stylesheet" href="./src/styles/index.css" />
+    <script type="module" crossorigin="anonymous" src="https://dgusta.netlify.app/widget/assets/index.dgusta.js"></script>
+    <link rel="stylesheet" href="https://dgusta.netlify.app/widget/assets/index.dgusta.css" />
   `;
 
     return (
