@@ -59,14 +59,15 @@ const restaurantController = {
     },
     getRestaurantBookings: async (req, res) => {
         const { id } = req.params;
-        const { date, time } = req.query;
+        const { date} = req.query;
         const { bookingController } = controllers;
+        console.log(`Enviando bookings, datos recibidos ${date}`)
         try {
             const bookings =
-                date && time
-                    ? await bookingController.getRestaurantBookingsByHour(id, date, `${time}:00`)
+                date
+                    ? await bookingController.getRestaurantBookingsByHour(id, date)
                     : await bookingController.getByRestaurant(id);
-            res.json({
+            res.status(200).json({
                 status: 'OK',
                 data: bookings
             });
