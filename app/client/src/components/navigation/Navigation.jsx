@@ -20,7 +20,7 @@ const Title = (props) => {
 export const Navigation = (props) => {
     const { layout } = props;
     const { isAuthenticated, firstName, restaurantName, isRestaurant, slug, isAdmin, signOut } = useUser();
-    console.log('NAVIGATION!! >> ', restaurantName);
+
     return (
         <nav className={styles.navBar}>
             <Title

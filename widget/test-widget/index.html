@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Restaurante Can Closes</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f8f9fa;
+            }
+            header {
+                background-color: #343a40;
+                color: #fff;
+                padding: 20px 0;
+                text-align: center;
+            }
+            h1.h1 {
+                margin: 0;
+                font-size: 36px;
+                text-transform: uppercase;
+            }
+            nav {
+                background-color: #fff;
+                text-align: center;
+                padding: 10px 0;
+            }
+            nav a.a {
+                padding: 10px 20px;
+                color: #333;
+                text-decoration: none;
+                margin: 0 10px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+            nav a.a:hover {
+                background-color: #e9ecef;
+            }
+            .container {
+                width: 80%;
+                margin: 20px auto;
+                text-align: center;
+            }
+            .container img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            p.p {
+                margin-bottom: 20px;
+                font-size: 18px;
+                line-height: 1.6;
+                color: #555;
+            }
+            h2.h2 {
+                font-size: 28px;
+                color: #007bff;
+                margin-bottom: 10px;
+            }
+            h3.h3 {
+                font-size: 24px;
+                color: #555;
+                margin-bottom: 10px;
+            }
+            ul.ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: left;
+            }
+            li.li {
+                margin-bottom: 10px;
+            }
+            footer {
+                background-color: #343a40;
+                color: #fff;
+                text-align: center;
+                padding: 20px 0;
+            }
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="h1">Restaurante Can Closes</h1>
+        </header>
+        <nav>
+            <a class="a" href="#menu">Menú</a>
+            <a class="a" href="#ubicacion">Ubicación</a>
+            <a class="a" href="#contacto">Contacto</a>
+        </nav>
+        <div class="container">
+            <h2 class="h2">Bienvenidos a Can Closes</h2>
+            <img src="restaurant.jpg" alt="Restaurante Can Closes" />
+            <p class="p">
+                Somos un restaurante familiar ubicado en un entorno natural. Ofrecemos platos tradicionales con ingredientes
+                frescos y de temporada. ¡Esperamos verte pronto!
+            </p>
+            <hr />
+            <h3 class="h3">Nuestro Menú Destacado</h3>
+            <ul class="ul">
+                <li class="li">Paella de mariscos</li>
+                <li class="li">Cordero asado</li>
+                <li class="li">Ensalada mediterránea</li>
+                <li class="li">Tiramisú casero</li>
+            </ul>
+            <hr />
+            <h3 class="h3">RESERVAS</h3>
+            <hr />
+            <div id="dgusta-widget-booking" data-restaurant="$2b$15$ujm.FtrDX007LzRIBlyQO0NsYBHx55WklR0rZunxP4WVuplMH2H."></div>
+
+            <script type="module" crossorigin="anonymous" src="https://dgusta.netlify.app/widget/assets/index.dgusta.js"></script>
+            <link rel="stylesheet" href="https://dgusta.netlify.app/widget/assets/index.dgusta.css" />
+        </div>
+        <footer>© 2024 Restaurante Can Closes. Todos los derechos reservados.</footer>
+    </body>
+</html>

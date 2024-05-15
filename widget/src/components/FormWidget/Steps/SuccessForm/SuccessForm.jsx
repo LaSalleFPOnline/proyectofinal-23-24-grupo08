@@ -4,8 +4,6 @@ import styles from './successForm.module.scss';
 const SuccessForm = (props) => {
     const { respForm } = props;
 
-    console.log('**************** SUCCESS FORM ---> ', respForm);
-
     return respForm?.status === 'OK' ? (
         <>
             <div className={styles.contentTitle}>
