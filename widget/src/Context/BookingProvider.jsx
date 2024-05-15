@@ -36,7 +36,6 @@ const BookingProvider = (props) => {
     };
 
     const updateBooking = (data) => {
-        console.log('>>>> UPDATE BOOKING DATA ---', { ...bookingData, ...data });
         setBookingData({ ...bookingData, ...data });
     };
 

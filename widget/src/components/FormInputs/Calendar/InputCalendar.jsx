@@ -55,9 +55,7 @@ const InputCalendar = (props) => {
                             getBusyHours(value);
                             setShowCalendar(false);
                         }}
-                        onActiveStartDateChange={({ activeStartDate }) => {
-                            console.log('onActiveStartDateChange >> ', activeStartDate);
-                        }}
+                        onActiveStartDateChange={({ activeStartDate }) => {}}
                         value={value}
                         className={styles.calendar}
                         tileClassName={({ date, view }) => {

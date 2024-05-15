@@ -1,5 +1,6 @@
 import { createContext, useEffect, useLayoutEffect, useState } from 'react';
 import { useData } from '../hooks/useData';
+import { getTimeToString } from '../helpers/dateHelper';
 
 export const RestaurantContext = createContext();
 
@@ -7,35 +8,49 @@ const RestaurantProvider = (props) => {
     const { children } = props;
     const [dataRestaurant, setDataRestaurant] = useState({});
     const [isValidRestaurant, setIsValidRestaurant] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { data, loading, error, getData } = useData();
 
     useLayoutEffect(() => {
+        setIsLoading(true);
         const root = document.querySelector('#dgusta-widget-booking');
         const widgetCode = root.dataset.restaurant;
-        console.log(' widgetCode restaurant ---> ', widgetCode);
         getData(`/restaurant/widgetValidation?widgetCode=${widgetCode}`);
     }, []);
 
     useEffect(() => {
-        if (data?.status === 'OK') {
+        if (data?.status === 'OK' && data?.data) {
             console.log('*** VALIDATE RESTAURANT >> ', data);
-            // TODO: Treure mock configuració
+            const {
+                capacity,
+                closeTimeDinner,
+                closeTimeLaunch,
+                daysClosed,
+                id,
+                intervalHourBooking,
+                name,
+                openTimeDinner,
+                openTimeLaunch,
+                slug,
+                userId
+            } = data.data;
+
             setDataRestaurant({
                 ...data.data,
                 calendar: {
-                    busyDays: ['2024-04-26'],
-                    daysClose: [1],
-                    capacity: 40,
+                    busyDays: ['2024-05-26'],
+                    daysClose: daysClosed ? [daysClosed] : [],
+                    capacity: capacity,
                     openHours: {
-                        intervalHourBooking: 15,
+                        intervalHourBooking: intervalHourBooking,
                         launch: {
-                            start: '12',
-                            end: '15'
+                            start: getTimeToString(openTimeLaunch),
+                            end: getTimeToString(closeTimeLaunch)
                         },
                         dinner: {
-                            start: '18',
-                            end: '23'
+                            start: getTimeToString(openTimeDinner),
+                            end: getTimeToString(closeTimeDinner)
                         }
                     }
                 },
@@ -46,7 +61,10 @@ const RestaurantProvider = (props) => {
                 }
             });
             setIsValidRestaurant(true);
+        } else {
+            setIsValidRestaurant(false);
         }
+        setIsLoading(false);
     }, [data]);
 
     return (
@@ -55,7 +73,7 @@ const RestaurantProvider = (props) => {
                 ...dataRestaurant
             }}
         >
-            {loading ? (
+            {isLoading ? (
                 <p>Cargando...</p>
             ) : isValidRestaurant && !error ? (
                 children

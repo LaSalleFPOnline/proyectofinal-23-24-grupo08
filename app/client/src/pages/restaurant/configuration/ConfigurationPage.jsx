@@ -7,20 +7,12 @@ import ConfigurationPersonalData from '../../../components/restaurant/Configurat
 import { useNavigate } from 'react-router-dom';
 
 const ConfigurationPage = (props) => {
-    const { restaurantId } = useUser();
-    const navigate = useNavigate();
-    console.log('*** ConfigurationPage -> ', { restaurantId });
-
-    const handleButtonClick = (key) => {
-        console.log('Botón clicado:', key);
-    };
-
     return (
         <>
             <RestaurantNavBar />
 
             <div className='configurationContainer'>
-                <ConfigurationNavBar onButtonClick={handleButtonClick} />
+                <ConfigurationNavBar />
                 <div className='configurationBody'>
                     <ConfigurationPersonalData />
                 </div>

@@ -13,6 +13,7 @@ const InputHours = (props) => {
     const { className, style, name, value, onChange, error, helperText } = props;
     const { loadingHours, dataHours, bookingData } = useBooking();
     const { restaurantCalendar } = useRestaurant();
+    console.log('INPUT HOURS >> OPEN HOURS >> ', restaurantCalendar.openHours);
     const launchHours = getIntervalHours(
         restaurantCalendar.openHours.launch.start,
         restaurantCalendar.openHours.launch.end,

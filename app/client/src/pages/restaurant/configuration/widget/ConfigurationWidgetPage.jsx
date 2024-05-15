@@ -6,10 +6,6 @@ import ConfigurationWidget from '../../../../components/restaurant/Configuration
 import './configurationWidgetStyles.css';
 
 const ConfigurationWidgetPage = (props) => {
-    const { restaurantId } = useUser();
-
-    console.log('*** ConfigurationPage -> ', { restaurantId });
-
     return (
         <>
             <RestaurantNavBar />

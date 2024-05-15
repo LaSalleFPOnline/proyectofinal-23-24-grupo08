@@ -15,14 +15,12 @@ const BookingsPage = (props) => {
     const { data: dataBookings, isLoading, hasError, getData: getBookings } = useData();
 
     useEffect(() => {
-        console.log("bookings")
         getBookings(`/restaurant/${restaurantId}/bookings?date=${selectedDate}`);
     }, [selectedDate]);
 
-    const selectedDay = (fechaOriginal) =>{
-
+    const selectedDay = (fechaOriginal) => {
         const year = fechaOriginal.getFullYear();
-        const month = fechaOriginal.getMonth() + 1; 
+        const month = fechaOriginal.getMonth() + 1;
         const day = fechaOriginal.getDate();
 
         const monthString = month < 10 ? `0${month}` : `${month}`;
@@ -30,7 +28,7 @@ const BookingsPage = (props) => {
 
         const fechaFormateada = `${year}-${monthString}-${dayString}`;
 
-        setSelectedDate(fechaFormateada)
+        setSelectedDate(fechaFormateada);
     };
 
     return (
@@ -40,11 +38,12 @@ const BookingsPage = (props) => {
             ) : (
                 <>
                     <RestaurantNavBar />
-                    <DatePicker getSelectedDay={selectedDay}
-                                    endDate={200}
-                                    selectDate={selectedDate}
-                                    labelFormat={"MMMM"}
-                                    color={"#2a5865"}        
+                    <DatePicker
+                        getSelectedDay={selectedDay}
+                        endDate={200}
+                        selectDate={selectedDate}
+                        labelFormat={'MMMM'}
+                        color={'#2a5865'}
                     />
                     <div className='mainBookingsContainer'>
                         <div className='bookingsPreview'>
@@ -54,9 +53,9 @@ const BookingsPage = (props) => {
                                     {dataBookings.data.map((booking, index) => {
                                         const currentTime = new Date();
                                         const bookingTime = new Date();
-                                        const [hours, minutes] = booking.time.split(":");
+                                        const [hours, minutes] = booking.time.split(':');
                                         bookingTime.setHours(hours, minutes);
-                                    
+
                                         if (bookingTime < currentTime) {
                                             return (
                                                 <BookingCards
@@ -66,9 +65,11 @@ const BookingsPage = (props) => {
                                                     assignedTables={[1, 2]}
                                                     reservationName={booking.name}
                                                 />
-                                            ); 
+                                            );
                                         } else {
-                                            console.log(`Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`);
+                                            console.log(
+                                                `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
+                                            );
                                         }
                                     })}
                                 </div>
@@ -79,9 +80,9 @@ const BookingsPage = (props) => {
                                     {dataBookings.data.map((booking, index) => {
                                         const currentTime = new Date();
                                         const bookingTime = new Date();
-                                        const [hours, minutes] = booking.time.split(":");
+                                        const [hours, minutes] = booking.time.split(':');
                                         bookingTime.setHours(hours, minutes);
-                                    
+
                                         if (bookingTime > currentTime) {
                                             return (
                                                 <BookingCards
@@ -91,9 +92,11 @@ const BookingsPage = (props) => {
                                                     assignedTables={[1, 2]}
                                                     reservationName={booking.name}
                                                 />
-                                            ); 
+                                            );
                                         } else {
-                                            console.log(`Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`);
+                                            console.log(
+                                                `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
+                                            );
                                         }
                                     })}
                                 </div>

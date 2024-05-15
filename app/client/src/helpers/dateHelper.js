@@ -31,6 +31,7 @@ const getIntervalHours = (start, end, interval) => {
     const timeArray = [];
     const initHour = start.split(':')[0];
     let initMinutes = start.split(':')[1] || 0;
+    initMinutes = initMinutes === '00' ? 0 : initMinutes;
     const endHour = end.split(':')[0];
     const endMinutes = end.split(':')[1] || 0;
 

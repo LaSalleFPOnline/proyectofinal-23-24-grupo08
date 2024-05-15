@@ -4,10 +4,12 @@ import './bookingCalendarStyles.css';
 import bookings from './content';
 import BookingCards from '../BookingCards/BookingCards';
 import { useData } from '../../../../hooks/useData';
-import { getFormatTime } from '../../../../helpers/dateHelper';
+import { getFormatTime, getIntervalHours } from '../../../../helpers/dateHelper';
+import { useUser } from '../../../../hooks/useUser';
 
 const BookingCalendar = (props) => {
     const { dataBookings } = props;
+    const { config } = useUser();
     const tablesNumber = 12;
     const scrollRef = useRef(null);
 
@@ -19,25 +21,16 @@ const BookingCalendar = (props) => {
             }
         };
 
-        scrollToTime('16:00');
+        scrollToTime('13:00');
     }, []);
 
     const getTimeZones = () => {
-        const timeZones = [];
-        let hour = 12;
-        let minute = 0;
+        const launchHours = getIntervalHours(config.launch.start, config.launch.end, config.intervalHourBooking);
+        const dinnerHours = getIntervalHours(config.dinner.start, config.dinner.end, config.intervalHourBooking);
 
-        while (hour <= 23) {
-            const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-            timeZones.push(time);
+        const getTimeValues = (hours) => hours.map((hour) => hour.value);
 
-            if (minute === 30) {
-                hour++;
-                minute = 0;
-            } else {
-                minute = 30;
-            }
-        }
+        const timeZones = [...getTimeValues(launchHours), ...getTimeValues(dinnerHours)];
 
         return timeZones;
     };
@@ -55,7 +48,7 @@ const BookingCalendar = (props) => {
                     </div>
                     <div className='bookingsTimeZones'>
                         {getTimeZones().map((time, index) => (
-                            <div key={index} id={`timeZone-${time}`} className='timeZone'>
+                            <div key={`bookingsTimeZones-${index}`} id={`timeZone-${time}`} className='timeZone'>
                                 <p>{time}</p>
                                 <div className='timeZoneForTable'>
                                     {Array.from({ length: tablesNumber }, (_, i) => (
