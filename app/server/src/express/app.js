@@ -21,16 +21,4 @@ app.use('/api/user', endpointsUser);
 app.use('/api/booking', endpointsBooking);
 app.use('/api/restaurant', endpointsRestaurant);
 
-function makeHandlerAwareOfAsyncErrors(handler) {
-    return async function (req, res, next) {
-        try {
-            await handler(req, res);
-            console.log('-----> RES', res);
-            console.log('------>REQ', req);
-        } catch (error) {
-            next(error);
-        }
-    };
-}
-
 module.exports = app;

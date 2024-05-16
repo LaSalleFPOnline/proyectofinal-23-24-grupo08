@@ -247,4 +247,8 @@ const generateUniqueId = () => {
     return id;
 };
 
-module.exports = { getSlug, generateUniqueId, getTimeToString };
+const cleanURL = (url) => {
+    return url.replace(/^(https?:\/\/)?(www\.)?/i, '');
+};
+
+module.exports = { getSlug, generateUniqueId, getTimeToString, cleanURL };

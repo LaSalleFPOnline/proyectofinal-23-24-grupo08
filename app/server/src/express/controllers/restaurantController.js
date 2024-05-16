@@ -1,4 +1,4 @@
-const { generateUniqueId } = require('../../helpers/stringHelpers');
+const { generateUniqueId, cleanURL } = require('../../helpers/stringHelpers');
 const sequelize = require('../../sequelize');
 const { restaurant: Restaurant } = sequelize.models;
 let controllers = null;
@@ -59,14 +59,13 @@ const restaurantController = {
     },
     getRestaurantBookings: async (req, res) => {
         const { id } = req.params;
-        const { date} = req.query;
+        const { date } = req.query;
         const { bookingController } = controllers;
-        console.log(`Enviando bookings, datos recibidos ${date}`)
+        console.log(`Enviando bookings, datos recibidos ${date}`);
         try {
-            const bookings =
-                date
-                    ? await bookingController.getRestaurantBookingsByHour(id, date)
-                    : await bookingController.getByRestaurant(id);
+            const bookings = date
+                ? await bookingController.getRestaurantBookingsByHour(id, date)
+                : await bookingController.getByRestaurant(id);
             res.status(200).json({
                 status: 'OK',
                 data: bookings
@@ -84,12 +83,27 @@ const restaurantController = {
                 }
             });
 
-            // TODO: Mirar si la petició ve del domini correcte
+            if (!restaurant || !restaurant?.widgetDomains) {
+                res.json({
+                    status: 'KO',
+                    message: 'Fallo al encontrar restaurante'
+                });
+            }
 
-            res.json({
-                status: 'OK',
-                data: restaurant
-            });
+            const origin = cleanURL(req.get('Origin'));
+            const widgetDomains = cleanURL(restaurant.widgetDomains);
+
+            if (origin === widgetDomains) {
+                res.json({
+                    status: 'OK',
+                    data: restaurant
+                });
+            } else {
+                res.json({
+                    status: 'KO',
+                    message: 'Dominio no valido'
+                });
+            }
         } catch (error) {
             res.status(500).json({ status: 'KO', message: 'Error al obtener el restaurant restaurante' });
         }
@@ -112,11 +126,9 @@ const restaurantController = {
         const { userId, name, slug } = params;
         try {
             const widgetCode = generateUniqueId();
-            console.log('GENEREM TOKEN > ', widgetCode);
             const newRestaurant = await Restaurant.create({ userId, name, slug, widgetCode });
             return newRestaurant;
         } catch (error) {
-            console.log('ERROR CREATE FROM REGISTER RESTAURANTB >> ', error);
             return false;
         }
     },
