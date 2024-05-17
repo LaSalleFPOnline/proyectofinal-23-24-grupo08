@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useData } from '../hooks/useData';
+import __isUndefined from 'lodash/isUndefined';
 
 export const UserContext = createContext();
 
@@ -35,7 +36,6 @@ const UserProvider = (props) => {
     const navigate = useNavigate();
 
     const signUp = (params) => {
-        console.log('sign up >> ', params);
         postRegister('/register', params);
     };
 
@@ -53,7 +53,6 @@ const UserProvider = (props) => {
     };
 
     const updateConfig = (data) => {
-        console.log('update config >>> ', data);
         setUserData({
             ...userData,
             config: {
@@ -62,12 +61,12 @@ const UserProvider = (props) => {
                 capacity: data?.capacity || userData.config.capacity,
                 intervalHourBooking: data?.intervalHourBooking || userData.config.intervalHourBooking,
                 launch: {
-                    start: data?.openTimeLaunch || userData.config.launch.openTimeLaunch,
-                    end: data?.closeTimeLaunch || userData.config.launch.closeTimeLaunch
+                    start: data?.openTimeLaunch || userData.config.launch.start,
+                    end: data?.closeTimeLaunch || userData.config.launch.end
                 },
                 dinner: {
-                    start: data?.openTimeDinner || userData.config.dinner.openTimeDinner,
-                    end: data?.closeTimeDinner || userData.config.dinner.closeTimeDinner
+                    start: data?.openTimeDinner || userData.config.dinner.start,
+                    end: data?.closeTimeDinner || userData.config.dinner.end
                 }
             }
         });
@@ -87,7 +86,6 @@ const UserProvider = (props) => {
 
     useEffect(() => {
         if (dataLogin) {
-            console.log('data login >>> ', { dataLogin });
             if (dataLogin?.status === 'OK') {
                 setErrorLogin(false);
                 setUserDataAuthenticated(dataLogin);
@@ -113,7 +111,6 @@ const UserProvider = (props) => {
 
     useEffect(() => {
         if (dataRegister) {
-            console.log('data register >>> ', dataRegister);
             if (dataRegister?.status === 'OK') {
                 setUserDataAuthenticated(dataRegister);
                 const { isRestaurant, slug } = dataRegister.data;
