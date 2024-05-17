@@ -67,9 +67,9 @@ const BookingsPage = (props) => {
                                                 />
                                             );
                                         } else {
-                                            console.log(
-                                                `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
-                                            );
+                                            // console.log(
+                                            //     `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
+                                            // );
                                         }
                                     })}
                                 </div>
@@ -94,9 +94,9 @@ const BookingsPage = (props) => {
                                                 />
                                             );
                                         } else {
-                                            console.log(
-                                                `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
-                                            );
+                                            // console.log(
+                                            //     `Booking time en próximas reservas, hora actual ${currentTime} hora de la reserva ${bookingTime}`
+                                            // );
                                         }
                                     })}
                                 </div>

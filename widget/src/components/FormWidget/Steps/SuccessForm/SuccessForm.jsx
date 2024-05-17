@@ -17,7 +17,7 @@ const SuccessForm = (props) => {
                             <p>{respForm.data.date}</p>
                         </div>
                         <div className={styles.line}>
-                            <Icon icon='ico-rellotge' alt='horari' size={19} color='fosc' className={styles.resumeIcon} />
+                            <Icon icon='ico-clock' alt='horari' size={19} color='fosc' className={styles.resumeIcon} />
                             <p>{respForm.data.time}</p>
                         </div>
                         <div className={styles.line}>

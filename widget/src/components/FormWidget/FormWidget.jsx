@@ -15,9 +15,10 @@ import __isEmpty from 'lodash/isEmpty';
 import __isUndefined from 'lodash/isUndefined';
 import clsx from 'clsx';
 import styles from './formWidget.module.scss';
+import { useRestaurant } from '../../hooks/useRestaurant';
 
 const formData = {
-    idRestaurant: 1,
+    idRestaurant: '',
     date: '',
     time: '',
     guests: 2,
@@ -30,10 +31,10 @@ const formData = {
 const FormWidget = (props) => {
     const { type, style } = props;
     const { updateBooking } = useBooking();
-
+    const { restaurantId } = useRestaurant();
     const [stepActive, setStepActive] = useState(1);
     const [stepDadesReservaSubmitted, setStepDadesReservaSubmitted] = useState(false);
-
+    formData.idRestaurant = restaurantId;
     const errorBooking = false;
 
     const numSteps = 3;

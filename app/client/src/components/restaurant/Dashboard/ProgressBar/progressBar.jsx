@@ -1,8 +1,6 @@
 import React from 'react';
 
 const ProgressBar = ({ percentage }) => {
-    console.log("percentage:", percentage);
-
     const getColor = () => {
         const red = Math.round(255 * (1 - percentage / 100));
         const green = Math.round(255 * (percentage / 100));
@@ -11,12 +9,12 @@ const ProgressBar = ({ percentage }) => {
 
     const progressBarStyle = {
         width: `${percentage}%`,
-        backgroundColor: getColor(),
+        backgroundColor: getColor()
     };
 
     return (
-        <div className="progress-bar">
-            <div className="progress" style={progressBarStyle}></div>
+        <div className='progress-bar'>
+            <div className='progress' style={progressBarStyle}></div>
         </div>
     );
 };
