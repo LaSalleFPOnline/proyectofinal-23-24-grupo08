@@ -21,7 +21,7 @@ const BookingCalendar = (props) => {
             }
         };
 
-        scrollToTime('13:00');
+        scrollToTime('12:00');
     }, []);
 
     const getTimeZones = () => {

@@ -36,7 +36,7 @@ const bookingController = {
                     }
                 }
             });
-            console.log('getRestaurantBookingsByHour >> ', { bookings, date});
+            console.log('getRestaurantBookingsByHour >> ', { bookings, date });
             if (!bookings) return [];
 
             return bookings;
@@ -73,10 +73,10 @@ const bookingController = {
     create: async (req, res) => {
         const { idRestaurant, date, time, guests, comments, name, email, phone } = req.body;
         const { restaurantController } = controllers;
-
+        console.log('BODY >>> ', req.body);
         try {
             await Promise.resolve();
-
+            console.log('idRestaurant >>> ', idRestaurant);
             const capacity = await restaurantController.getCapacity(idRestaurant);
             const hourBookings = await bookingController.getRestaurantBookingsByHour(idRestaurant, date, time);
             const totalGuests = hourBookings?.reduce((total, booking) => {

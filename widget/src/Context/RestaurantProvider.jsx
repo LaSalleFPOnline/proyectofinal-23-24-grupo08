@@ -21,7 +21,6 @@ const RestaurantProvider = (props) => {
 
     useEffect(() => {
         if (data?.status === 'OK' && data?.data) {
-            console.log('*** VALIDATE RESTAURANT >> ', data);
             const {
                 capacity,
                 closeTimeDinner,
